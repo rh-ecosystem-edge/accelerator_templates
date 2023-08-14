@@ -1,7 +1,17 @@
+---
+apiVersion: v1
+type: kubernetes.io/dockerconfigjson
+kind: Secret
+metadata:
+  name: pt-char-pull-secret
+data:
+  .dockerconfigjson: <token with rw permissions on registry>
+
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: pt_char_dev_dockerfile
+  name: pt-char-dev-dockerfile
 data:
   Dockerfile:
     ARG DTK_AUTO
@@ -17,12 +27,11 @@ data:
     COPY --from=builder /usr/src/simple_char_dev/simple_char_dev.ko /opt/lib/modules/${KERNEL_VERSION}/
     RUN depmod -b /opt ${KERNEL_VERSION}
 
-
 ---
 apiVersion: kmm.sigs.x-k8s.io/v1beta1
 kind: Module
 metadata:
-  name: pt_char_dev
+  name: pt-char-dev
 spec:
   moduleLoader:
     container:
@@ -34,7 +43,7 @@ spec:
           - default_msg=ptemplate
       imagePullPolicy: Always  # optional
       kernelMappings:  # At least one item is required
-        - regexp: '^.+\el9\.x86_64$'
+        - regexp: '^.+$'
           containerImage: "some.registry/org/my-kmod:${KERNEL_FULL_VERSION}"
           build:
             baseImageRegistryTLS:
@@ -45,7 +54,7 @@ spec:
               # pulling the image in the Dockerfile's FROM instruction using plain HTTP.
               insecureSkipTLSVerify: false
             dockerfileConfigMap:  # Required
-              name: pt_char_dev_dockerfile
+              name: pt-char-dev-dockerfile
           registryTLS:
             # Optional and not recommended! If true, KMM will be allowed to check if the container image already exists
             # using plain HTTP.
@@ -54,6 +63,6 @@ spec:
             # the container image already exists.
             insecureSkipTLSVerify: false
   imageRepoSecret:  # Optional. Used to pull ModuleLoader and device plugin images
-    name: secret-name
+    name: pt-char-pull-secret
   selector:
-    node-role.kubernetes.io/worker: ""
+    node-role.kubernetes.io/worker: "worker"
