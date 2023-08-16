@@ -5,8 +5,7 @@ KVER=$(shell uname -r)
 endif
 
 ifndef KMODVER
-	#KMODVER=$(shell git describe HEAD 2>/dev/null || git rev-parse --short HEAD)
-	KMODVER=1
+	KMODVER=$(shell git describe HEAD 2>/dev/null || git rev-parse --short HEAD)
 endif
 
 all:
