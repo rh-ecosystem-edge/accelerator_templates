@@ -1,13 +1,19 @@
-ARG DTK=registry.redhat.io/openshift4/driver-toolkit-rhel9:v4.13.0-202308011445.p0.gd719bdc.assembly.stream as builder
-FROM ${DTK} as builder
+
 ARG KERNEL_VERSION
+ARG DTK=registry.redhat.io/openshift4/driver-toolkit-rhel9:v4.13.0-202308011445.p0.gd719bdc.assembly.stream as builder
+ARG KMOD_SRC=https://github.com/chr15p/partner_templates.git
+ARG REPO_DIR=partner_templates/kernel_module/
+
+FROM ${DTK} as builder
 WORKDIR /usr/src
-RUN ["git", "clone", "https://github.com/chr15p/partner_templates.git"]
-WORKDIR /usr/src/partner_templates/kernel_module/
+RUN ["git", "clone", "${KMOD_SRC}"]
+WORKDIR /usr/src/${REPO_DIR}
 RUN KERNEL_SRC_DIR=/lib/modules/${KERNEL_VERSION}/build make all KVER=${KERNEL_VERSION}
 
 FROM registry.redhat.io/ubi9/ubi-minimal
 ARG KERNEL_VERSION
 RUN ["microdnf", "install", "-y", "kmod"]
-COPY --from=builder /usr/src/partner_templates/kernel_module/ptemplate_char_dev.ko /opt/lib/modules/${KERNEL_VERSION}/
+COPY --from=builder /usr/src/${REPO_DIR}/*.ko /opt/lib/modules/${KERNEL_VERSION}/
 RUN depmod -b /opt ${KERNEL_VERSION}
+
+CMD [ "modprobe", "-d", "/opt", "ptemplate_char_dev"]

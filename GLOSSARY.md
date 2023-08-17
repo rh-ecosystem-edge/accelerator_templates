@@ -1,0 +1,19 @@
+# Glossary
+
+### driver container
+A container that loads a device driver (kmod) on startup. 
+
+### kmod
+A kernel module. A binary file, normally with a .ko file extension that provides a device driver or other piece of optional functionality that can be loaded into the Linus Kernel if required.
+
+### kmm
+The Kernel Module Management operator used for managing the deployment of kernel modules across Openshift clusters using [driver containers](#driver container).
+
+### nfd
+The Node Feature Discovery operator and components used for adding a wide range of hardware labels to Openshift nodes
+
+### out-of-tree drivers
+Drivers and kernel modules that are maintained outside of the Linux source tree. They are distributed outside of the kernel source and maintained by third parties (who may be a Linux distribution provider or more commonly a hardware provider). As the kernel is updated the third-party is responsible for updating the driver to ensure compatibility.
+
+### in-tree drivers
+Drivers and kernel modules maintained as part of the Linux source tree with their source code available from kernel.org under the terms of the GPL. As part of the Linux source they are updated to ensure they work with the version of the kernel.
