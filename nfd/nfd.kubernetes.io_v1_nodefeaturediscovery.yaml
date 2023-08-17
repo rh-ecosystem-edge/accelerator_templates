@@ -12,7 +12,7 @@ spec:
   workerConfig:
     configData: |
       core:
-        labelSources: ["custom"]
+        labelSources: ["all"]
       sources:
         kernel:
           configOpts:
