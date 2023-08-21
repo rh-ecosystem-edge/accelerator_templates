@@ -11,13 +11,13 @@
 #define BUFSIZE 100
 
 static int max_dev=MAX_DEV;
-module_param(max_dev,int,0660);
+module_param(max_dev,int,0664);
 
 static int buffersize=BUFSIZE;
-module_param(buffersize,int,0660);
+module_param(buffersize,int,0664);
 
 static char *default_msg = "uninitialised";
-module_param(default_msg,charp,0660);
+module_param(default_msg,charp,0664);
 
 char *buffer;
 
