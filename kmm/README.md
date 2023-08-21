@@ -7,6 +7,6 @@ The Kernel Module Management Operator is designed too manage out-of-tree kernel 
 
 ## Links
 
-* [https://kmm.sigs.k8s.io](Upstream documentation)
-* [https://github.com/kubernetes-sigs/kernel-module-management/](Upstream) (where development is done)
-* [https://github.com/rh-ecosystem-edge/kernel-module-management/](Midstream) (forms the basis of the Openshift release)
+* [KMM's Upstream documentation] (https://kmm.sigs.k8s.io)
+* [Upstream Repo] (https://github.com/kubernetes-sigs/kernel-module-management/) where most development work is done.
+* [KMM's Openshift Repo ](https://github.com/rh-ecosystem-edge/kernel-module-management/) forms the basis for the Openshift release of KMM. Upstream changes are merged into here regularly, and Openshift specific development and testing is performed.
