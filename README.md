@@ -14,19 +14,19 @@ To achieve this we break the problem down into a number of chapters. Not all sol
 
 ## Table Of Contents
 
-* [kernel_module](kernel_module/README.md)
+1. [kernel_module](kernel_module/README.md)
 
-* [driver_containers](driver_containers/README.md)
+1. [driver_containers](driver_containers/README.md)
 
-* [kmm](kmm/README.md)
+1. [kmm](kmm/README.md)
 
-* [nfd](nfd/README.md)
+1. [nfd](nfd/README.md)
 
-* device_plugin
+1. device_plugin
 
-* operator
+1. operator
 
-
+1. [Glossary Of Terms](GLOSSARY.md)
 
 
 
