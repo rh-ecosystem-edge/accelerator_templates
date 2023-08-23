@@ -6,6 +6,9 @@ A container that loads a device driver (kmod) on startup.
 ### kmod
 A kernel module. A binary file, normally with a .ko file extension that provides a device driver or other piece of optional functionality that can be loaded into the Linus Kernel if required.
 
+### ko file
+A kernel object file. A kernel module compiled into a single file ready for loading into the kernel
+
 ### kmm
 The Kernel Module Management operator used for managing the deployment of kernel modules across Openshift clusters using [driver containers](#driver container).
 
