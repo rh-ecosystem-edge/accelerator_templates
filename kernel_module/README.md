@@ -5,8 +5,7 @@
 
 ## Cookbook
 
-1. [I want to load and unload a kernel module]
-1. [I want to build a toy kernel module](building_ptemplate.md)
+1. [I want to build and load a toy kernel module](building_ptemplate.md)
 1. [I want to know who supports my kernel module](support.md)
 
 
