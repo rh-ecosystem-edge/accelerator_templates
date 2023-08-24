@@ -16,7 +16,7 @@ To achieve this we break the problem down into a number of chapters. Not all sol
 
 1. [Kernel Modules](kernel_module/README.md)
 
-1. [Driver Containers](driver_containers/README.md)
+1. [Driver Containers](driver_container/README.md)
 
 1. [The Kernel Module Management (kmm) operator](kmm/README.md)
 
