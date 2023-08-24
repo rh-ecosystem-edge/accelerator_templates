@@ -15,3 +15,6 @@ Therefore if you have created a kernel module, your operating system vendor can 
 
 Kernel modules can be very complicated and add a very wide range of functionality to the kernel, generally the only person or organisation that understands them is the creator of the code, any third party is going to struggle to help even if they do have a deep knowledge of kernel internals or other kernel modules.
 
+## Links
+
+* [As a customer how does Red Hat support me when I use third party components?](https://access.redhat.com/third-party-software-support)

@@ -18,6 +18,6 @@ There are many guides only to writing and building kernel modules.
 * Linux kernel documentation
 https://docs.kernel.org/kbuild/modules.html 
 
-
+* [As a customer how does Red Hat support me when I use third party components?](https://access.redhat.com/third-party-software-support)
 
 
