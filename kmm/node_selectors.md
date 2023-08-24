@@ -18,6 +18,7 @@ kubectl label node kube93.cp.chrisprocter.co.uk  ptemplate=required
 Once the nodes have the required labels update the selector field of the Module resource yaml to include it:
 
 ([see full file](node_selectors.yaml)):
+
 ```
 apiVersion: kmm.sigs.x-k8s.io/v1beta1
 kind: Module

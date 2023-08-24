@@ -20,10 +20,13 @@ The container doing the loading should finish immediately after completing the l
 podman run --privileged quay.io/example/pt-char-dev:5.14.0-284.25.1.el9_2.x86_64 rmmod ptemplate_char_dev
 ```
 
+
+
 ## Discussion
 
+A driver container image should be built to run `modprobe -d /opt <driver_name>` by default, in which case if we simply run it then it loads the driver and exists leaving the kmod in the kernel.
 
-
+You can check the default startup command simply, with 
 
 ```
 # podman inspect -f "{{.Config.Cmd}}" <image_name>
@@ -44,16 +47,19 @@ E.g.
 
 ```
 
-In which case you can run simply run it:
+If not this can simply be overridden on the `podman` command line such as:
 
 ```
-podman run quay.io/example/pt-char-dev:5.14.0-284.25.1.el9_2.x86_64
+podman run --privileged quay.io/chrisp262/pt-char-dev:5.14.0-284.25.1.el9_2.x86_64 modinfo -d /opt ptemplate_char_dev
+``
+
+
+A driver container needs to be run as `--privileged`, by default a container is only allowed limited access to devices, which prevents loading kernel modules. A "privileged" container is given the same access to devices as the user launching the container. Running a container with `--privileged` turns off the security features that isolate the container from the host. Dropped Capabilities, limited devices, read-only mount points, Apparmor/SELinux separation, and Seccomp filters are all disabled. Clearly this is not a thing you want to do for all containers, but in the case of driver containers is necessary.
+
+Failing to add the `--privileged` flag results in an error similar to:
+
 ```
-
-
-
-```
-podman push quay.io/example/pt-char-dev:5.14.0-284.25.1.el9_2.x86_64
+modprobe: ERROR: could not insert 'ptemplate_char_dev': Operation not permitted
 ```
 
 
