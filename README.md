@@ -22,7 +22,7 @@ To achieve this we break the problem down into a number of chapters. Not all sol
 
 1. [The Node Feature Discovery (nfd) operator](nfd/README.md)
 
-1. devices plugins
+1. [devices plugins](device_plugin/README.md)
 
 1. operators
 
