@@ -7,10 +7,17 @@ The Kernel Module Management Operator is designed too manage out-of-tree kernel 
 The KMM operator implements its own Custom Resource definition for resources of `kind: Module`. When a `Module` resource is defined KMM creates a daemonset that runs the referenced driver container on each of the nodes with the command
 
 ```
-/bin/sh -c modprobe -rv -d "/opt" "[driver_name]"
+/bin/sh -c modprobe -v -d "/opt" "[driver_name]"
 ```
 
 This loads the kmod on the referenced nodes. The kmod will now appear in the output of `lsmod` for the node and can be used just like any other loaded kmod.
+
+When the Module resource is deleted then the driver container pod is deleted and the kmod is unloaded via the `-r` argument to the `modprobe` command
+
+```
+/bin/sh -c modprobe -rv -d "/opt" "[driver_name]"
+```
+
 
 To check what Modules have been created in a cluster you can use `kubectl get module` and describe them as you would any other Kubernetes resource with `kubectl describe module pt-char-dev`
 
@@ -21,7 +28,7 @@ To check what Modules have been created in a cluster you can use `kubectl get mo
 * [I want to deploy a pre-built driver container with KMM](load_module.md)
 * [I want to manage which nodes my driver is loaded on](node_selectors.md)
 * [I want to load different drivers on different kernels]
-* [I need KMM to build my driver containers for me]
+* [I need KMM to build my driver containers for me](build_module.md)
 * [I use secureboot and need my drivers signed before loading]
 * [I want to load multiple kmods]
 * [I want to load custom firmware with my driver]
