@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+type: kubernetes.io/dockerconfigjson
+kind: Secret
+metadata:
+  name: pt-char-pull-secret
+data:
+  ## a token with pull permissions for the registry 
+  ## holding our driver container (e.g. quay.io/chrisp262/pt-char-dev)
+  .dockerconfigjson: <token with rw permissions on registry>
+
+---
+apiVersion: kmm.sigs.x-k8s.io/v1beta1
+kind: Module
+metadata:
+  name: pt-char-dev
+spec:
+  moduleLoader:
+    container:
+      modprobe:
+        ## the name of the kmod in the driver container
+        moduleName: ptemplate_char_dev
+        dirName: /opt
+        parameters:
+          ## pass some tuning parameters in to the module
+          - max_dev=5
+          - default_msg=ptemplate
+      ## imagePullPolicy is optional but usefull while debugging to be sure the latest version 
+      ## of the driver-container is used rather than an out-of-datge locally cached version
+      imagePullPolicy: Always 
+      kernelMappings:
+        ## the kmod will work on any kernel so a single mapping with a regexp that
+        ## matches any kernel version works well for us
+        - regexp: '^.+$'
+          containerImage: "quay.io/chrisp262/pt-char-dev:${KERNEL_FULL_VERSION}-sb"
+      kernelMappings:
+        - literal: 6.4.11-200.fc38.x86_64
+          containerImage: "quay.io/chrisp262/pt-char-dev-f37:6.4.11-200.fc38.x86_64"
+        - regexp: '^.+\fc37\.x86_64$'
+          containerImage: "quay.io/chrisp262/pt-char-dev-f37:${KERNEL_FULL_VERSION}"
+        - regexp: '^.+$'
+          containerImage: "quay.io/chrisp262/pt-char-dev:${KERNEL_FULL_VERSION}"
+  imageRepoSecret:  
+    ## the pull secret defined above
+    name: pt-char-pull-secret
+  selector:
+    node-role.kubernetes.io/worker: "worker"
+

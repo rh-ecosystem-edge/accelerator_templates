@@ -27,7 +27,7 @@ To check what Modules have been created in a cluster you can use `kubectl get mo
 
 * [I want to deploy a pre-built driver container with KMM](load_module.md)
 * [I want to manage which nodes my driver is loaded on](node_selectors.md)
-* [I want to load different drivers on different kernels]
+* [I want to load different drivers on different kernels](different_kernels.md)
 * [I need KMM to build my driver containers for me](build_module.md)
 * [I use secureboot and need my drivers signed before loading]
 * [I want to load multiple kmods]
