@@ -1,0 +1,13 @@
+apiVersion: nfd.k8s-sigs.io/v1alpha1
+kind: NodeFeatureRule
+metadata:
+  name: ptemplate-required-rule
+spec:
+  rules:
+    - name: "ptemplate_required"
+      labels:
+        "ptemplate": "required"
+      matchFeatures:
+        - feature: cpu.model
+          matchExpressions:
+            family: {op: In, value: ["6", "7","8"]}
