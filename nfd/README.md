@@ -1,18 +1,38 @@
 # Node Feature Discovery Operator
 
-The Node Feature Discovery Operator (NFD) manages the detection of hardware features and configuration in an OpenShift Container Platform cluster by labelling the nodes with hardware-specific information.
+Kubernetes uses labels to store and display metadata about its objects. As nodes are, within the kuberenets database, just another type of object they too can have labels attached to them, and these can then be used to distinguish features such as which nodes have particular type of PCI card installed, or CPU feature available.
+
+Labels are key/value pairs, and must obey some rules about their format.
+
+ The keys are made up of an optional prefix and a name, separated by a slash (/).
+
+* The prefix is optional and can be up to 253 characters in length before the slash.
+* The name segment is required and must be 63 characters or less,
+* They can contain alphanumeric character ([a-z0-9A-Z]), dashes (-), underscores (_), dots (.)
+* They must begin and end with an alphanumeric.
+
+The kubernetes.io/ and k8s.io/ prefixes are reserved for Kubernetes core components.
+
+Valid label value:
+* must be 63 characters or less,but can be empty (often depicted as "")
+* can contain alphanumeric character ([a-z0-9A-Z]), dashes (-), underscores (_), dots (.)
+* if not empty must begin and end with an alphanumeric.
+
+
+Labels can be added to each node manually or the Node Feature Discovery Operator (NFD) manages the detection of hardware features and configuration in an OpenShift Container Platform cluster and labels the nodes with hardware-specific information.
+
 
 ## Cookbook
 
-* I want to know if a nodes CPU supports a given flag
+* I want NFD to label nodes if a CPU supports a given flag
 
-* I want to know if a given PCI device exists on a node
+* I want NFD to label nodes if a given PCI device exists on a node
 
-* I want to know if a given USB device exists on a node
+* I want NFD to label nodes if a USB device exists on a node
 
-* I want to know if a given storage device exists on a node
+* I want NFD to label nodes if a given storage device exists on a node
 
-* I want to know if a kernel module is loaded on a node
+* I want NFD to label nodes if a kernel module is loaded on a node
 
 * [I want KMM to load kernel modules based on NFD labels](kmm.md)
 
