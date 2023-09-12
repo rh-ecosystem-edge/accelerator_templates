@@ -1,0 +1,11 @@
+apiVersion: nfd.kubernetes.io/v1
+kind: NodeFeatureDiscovery
+metadata:
+  name: my-nfd-deployment
+  namespace: nfd
+spec:
+  operand:
+    image: registry.k8s.io/nfd/node-feature-discovery:v0.13.4
+    imagePullPolicy: IfNotPresent
+  workerConfig:
+    configData:

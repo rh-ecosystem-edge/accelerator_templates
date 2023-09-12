@@ -24,9 +24,9 @@ Labels can be added to each node manually or the Node Feature Discovery Operator
 
 ## Cookbook
 
-* I want NFD to label nodes if a CPU supports a given flag
+* [I want NFD to label nodes if a CPU supports a given flag](cpu_flags.md)
 
-* I want NFD to label nodes if a given PCI device exists on a node
+* [I want to customise NFD to label nodes with a given PCI device](pci_devices.md)
 
 * I want NFD to label nodes if a USB device exists on a node
 
