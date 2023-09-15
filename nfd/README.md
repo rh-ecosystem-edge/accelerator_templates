@@ -28,11 +28,7 @@ Labels can be added to each node manually or the Node Feature Discovery Operator
 
 * [I want to customise NFD to label nodes with a given PCI device](pci_devices.md)
 
-* I want NFD to label nodes if a USB device exists on a node
-
-* I want NFD to label nodes if a given storage device exists on a node
-
-* I want NFD to label nodes if a kernel module is loaded on a node
+* [I want to add my NFD config to an existing setup easily](custom_rules.md)
 
 * [I want KMM to load kernel modules based on NFD labels](kmm.md)
 
