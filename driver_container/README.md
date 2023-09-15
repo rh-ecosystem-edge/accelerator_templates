@@ -20,6 +20,8 @@ Building a kernel module inside a Dockerfile is made more complicated by the lar
 
 1. [I need to run my driver container](driver_container_running.md)
 
+1. [I want to know why my driver container need to be run as privileged](Q_why_privileged.md)
+
 1. I need my driver at boot time
 
 ## Links

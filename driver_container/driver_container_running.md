@@ -12,31 +12,28 @@ A driver container can simply be run using the `podman` command:
 podman run --privileged quay.io/example/pt-char-dev:5.14.0-284.25.1.el9_2.x86_64
 ```
 
-If all goes well this will load the kernel module and running `lsmod` on the host operating system will list our new kernel module as loaded.
+This will load the kernel module using `modprobe` and immediately exit. Running `lsmod` on the host should show the newly loaded kernel module present in the kernel.
 
-The container doing the loading should finish immediately after completing the load, so to unload the kmod again you will need to use `rmmod` either from the host or in its own containerised command such as:
+Because the driver container exists after runnign `modprobe` unloading the kmod again requires running the `rmmod` command from the host, either directly or in its own containerised command e.g.:
 
 ```
 podman run --privileged quay.io/example/pt-char-dev:5.14.0-284.25.1.el9_2.x86_64 rmmod ptemplate_char_dev
 ```
 
+To gain more control of this process, and to use with on Openshift the [Kernel Module Management](../kmm/README.md) operator automates the loading and unloading process.
 
 
 ## Discussion
 
-A driver container image should be built to run `modprobe -d /opt <driver_name>` by default, in which case if we simply run it then it loads the driver and exists leaving the kmod in the kernel.
+A driver container image is built with is `CMD` setting set to `modprobe -d /opt <driver_name>` so when the container is started it runs that command and loads the driver. Once this command is completed the container exists but as the kmod is already in the kernel it remains there
 
-You can check the default startup command simply, with 
+You can check the default startup command for a container image simply, with 
 
 ```
 # podman inspect -f "{{.Config.Cmd}}" <image_name>
 ```
 
-Which should give an output something like:
-
-```
-[modprobe -d /opt <driver_name>]
-```
+Which should show the `modprobe` command
 
 E.g.
 
@@ -47,20 +44,13 @@ E.g.
 
 ```
 
-If not this can simply be overridden on the `podman` command line such as:
+It is also possible to override an incorrectly set `CMD` by passing the command when the container is run: 
 
 ```
 podman run --privileged quay.io/chrisp262/pt-char-dev:5.14.0-284.25.1.el9_2.x86_64 modinfo -d /opt ptemplate_char_dev
-``
-
-
-A driver container needs to be run as `--privileged`, by default a container is only allowed limited access to devices, which prevents loading kernel modules. A "privileged" container is given the same access to devices as the user launching the container. Running a container with `--privileged` turns off the security features that isolate the container from the host. Dropped Capabilities, limited devices, read-only mount points, Apparmor/SELinux separation, and Seccomp filters are all disabled. Clearly this is not a thing you want to do for all containers, but in the case of driver containers is necessary.
-
-Failing to add the `--privileged` flag results in an error similar to:
-
 ```
-modprobe: ERROR: could not insert 'ptemplate_char_dev': Operation not permitted
-```
+
+Although this is clearly a far more complex and unwieldy method so setting the `CMD` setting correctly is far superior.
 
 
 # Links
