@@ -16,14 +16,10 @@ Device Plugins provide a way to extend the resource concept to allow pods to res
 * [I want to schedule a worker pod only where there resources](scheduling_with_device_plugins.md)
 
 
-
-
 ## Links
+
 * [Openshift: Using device plugins to access external resources with pods](https://docs.openshift.com/container-platform/4.13/nodes/pods/nodes-pods-plugins.html) (Includes links to several example device plugins)
 
+* [Simple Device Plugin](https://github.com/yevgeny-shnaidman/simple-device-plugin/) an example device plugin configurable via a file.
 
-* https://github.com/yevgeny-shnaidman/simple-device-plugin/
-
-* https://github.com/NVIDIA/k8s-device-plugin
-
-* https://github.com/GoogleCloudPlatform/Container-engine-accelerators/tree/master/cmd/nvidia_gpu
+* [The NVIDIA device plugin for Kubernetes ](https://github.com/NVIDIA/k8s-device-plugin)
