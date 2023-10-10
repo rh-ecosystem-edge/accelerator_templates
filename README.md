@@ -26,7 +26,7 @@ To achieve this we break the problem down into a number of chapters. Not all sol
 
 1. operators
 
-1. Certification
+1. [Certification](certfication/README.md)
 
 1. [Glossary Of Terms](GLOSSARY.md)
 
