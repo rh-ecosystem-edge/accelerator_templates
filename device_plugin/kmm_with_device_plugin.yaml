@@ -1,0 +1,27 @@
+---
+apiVersion: kmm.sigs.x-k8s.io/v1beta1
+kind: Module
+metadata:
+  name: pt-char-dev
+spec:
+  # stanza pointing kmm to the device plugin container for the ptemplate plugin
+  devicePlugin:
+    container:
+      image: quay.io/chrisp262/pt-device-plugin:plugin-latest
+  moduleLoader:
+    container:
+      modprobe:
+        moduleName: ptemplate_char_dev
+        dirName: /opt
+        parameters:
+          - max_dev=5
+          - default_msg=ptemplate
+      imagePullPolicy: Always
+      kernelMappings:
+        - regexp: '^.+$'
+          containerImage: "quay.io/chrisp262/pt-char-dev:${KERNEL_FULL_VERSION}-sb"
+  imageRepoSecret:
+    name: pt-char-pull-secret
+  selector:
+    node-role.kubernetes.io/worker: worker
+
