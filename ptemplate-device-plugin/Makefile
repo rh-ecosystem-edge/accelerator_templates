@@ -19,7 +19,7 @@ fmt:
 
 .PHONY: image
 image: build
-	$(CONTAINER_RUNTIME_COMMAND) build --build-arg BASE_IMAGE=$(BASE_IMAGE) -t $(IMG) .
+	$(CONTAINER_RUNTIME_COMMAND) build -t $(IMG) .
 
 .PHONY: image-push
 image-push:

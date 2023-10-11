@@ -7,10 +7,10 @@ import (
 	"net"
 	"os"
 	"os/signal"
+	"path/filepath"
+	"strings"
 	"syscall"
 	"time"
-    "path/filepath"
-    "strings"
 
 	"github.com/go-logr/logr"
 	"github.com/oklog/run"
@@ -26,14 +26,11 @@ type exampleDevicePlugin struct {
 	k8sdeviceplugin.UnimplementedDevicePluginServer
 }
 
-//var devicePluginConfig Config
 var logger logr.Logger
 
 const (
-    DEVFS = "/dev/"
-    DEVICENAMEPREFIX = "ptemplate"
-    RESOURCENAME = "example.com/" + DEVICENAMEPREFIX
-    DEVPATH = "/dev/ptemplate*"
+	DEVICENAMEPREFIX = "ptemplate"
+	RESOURCENAME     = "example.com/" + DEVICENAMEPREFIX
 )
 
 // GetDevicePluginOptions always returns an empty response.
@@ -44,26 +41,21 @@ func (p *exampleDevicePlugin) GetDevicePluginOptions(_ context.Context, _ *k8sde
 func (p *exampleDevicePlugin) ListAndWatch(empty *k8sdeviceplugin.Empty, stream k8sdeviceplugin.DevicePlugin_ListAndWatchServer) error {
 	// Send an initial list of available devices.
 
-    //ptdevices, err := filepath.Glob(DEVFS + DEVICENAMEPREFIX + "*")
-    ptdevices, err := filepath.Glob(DEVPATH)
+	devPathGlob := fmt.Sprintf("/dev/%s-*", DEVICENAMEPREFIX)
+
+	ptdevices, err := filepath.Glob(devPathGlob)
 	if err != nil {
 		klog.Error(err, "could not get devices", "error", err)
 		os.Exit(1)
 	}
-    logger.Info("devices found:", "ptdevices", ptdevices) 
-    deviceCount := len(ptdevices)
+	logger.Info("devices found", "matching", devPathGlob, "ptdevices", ptdevices)
+	deviceCount := len(ptdevices)
 	resp := &k8sdeviceplugin.ListAndWatchResponse{
 		Devices: make([]*k8sdeviceplugin.Device, deviceCount),
 	}
 
-    for i, dev := range ptdevices {
-        //fileparts := strings.SplitN(dev, "-", 1) 
-        //devminor, err := strconv.Atoi(fileparts[1])
-        //if err != nil {
-		//    klog.Error(err, "cannot parse device name", "name", dev, "error", err)
-	    //	os.Exit(1)
-        //}
-        devminor := strings.SplitN(dev, "-", 2)[1]
+	for i, dev := range ptdevices {
+		devminor := strings.SplitN(dev, "-", 2)[1]
 
 		resp.Devices[i] = &k8sdeviceplugin.Device{
 			ID:     devminor,
@@ -75,7 +67,7 @@ func (p *exampleDevicePlugin) ListAndWatch(empty *k8sdeviceplugin.Empty, stream 
 		return status.Errorf(codes.Unknown, "failed to send response: %v", err)
 	}
 
-	logger.Info("successfully reported node device to the kubelet", "number devices", deviceCount, "filepath", DEVPATH)
+	logger.Info("successfully reported node device to the kubelet", "number devices", deviceCount)
 
 	// Wait for the stream to be closed or cancelled.
 	<-stream.Context().Done()
@@ -87,11 +79,11 @@ func (p *exampleDevicePlugin) Allocate(ctx context.Context, req *k8sdeviceplugin
 	// Check that the requested devices are available.
 	for _, containerReq := range req.ContainerRequests {
 		for _, id := range containerReq.DevicesIDs {
-            _, err := os.Stat(DEVFS + DEVICENAMEPREFIX + "-" + id)
-            if err != nil  {
+			_, err := os.Stat("/dev/" + DEVICENAMEPREFIX + "-" + id)
+			if err != nil {
 				logger.Error(fmt.Errorf("requested device not present on the node"), "missing device", " device id ", id)
 				return nil, status.Errorf(codes.NotFound, "requested device %s is not available", id)
-            }
+			}
 		}
 	}
 
@@ -106,21 +98,22 @@ func (p *exampleDevicePlugin) Allocate(ctx context.Context, req *k8sdeviceplugin
 		}
 
 		for _, id := range req.DevicesIDs {
-				envVariable := fmt.Sprintf("%s_%s", DEVICENAMEPREFIX, id)
-				containerResp.Envs[envVariable] = fmt.Sprintf("/dev/%s-%s", DEVICENAMEPREFIX, id)
-				logger.Info("set environment variable", "env name", envVariable, "value", containerResp.Envs[envVariable])
+			devPath := fmt.Sprintf("/dev/%s-%s", DEVICENAMEPREFIX, id)
+			envVariable := fmt.Sprintf("%s_%s", DEVICENAMEPREFIX, id)
 
-				annotationKey := fmt.Sprintf("%s-%s", DEVICENAMEPREFIX, id)
-				containerResp.Annotations[annotationKey] = ""
-				logger.Info("set annotation", "annotation name", annotationKey, "value", containerResp.Annotations[annotationKey])
+			containerResp.Envs[envVariable] = devPath
+			logger.Info("set environment variable", "env name", envVariable, "value", containerResp.Envs[envVariable])
 
-				containerResp.Devices = append(containerResp.Devices, &k8sdeviceplugin.DeviceSpec{
-					HostPath:      fmt.Sprintf("/dev/%s-%s", DEVICENAMEPREFIX, id),
-					ContainerPath: fmt.Sprintf("/dev/%s-%s", DEVICENAMEPREFIX, id),
-					Permissions:   "rw",
-				})
-				logger.Info("setting device file", "hostPath", fmt.Sprintf("/dev/%s-%s", DEVICENAMEPREFIX, id),
-					"containerPath", fmt.Sprintf("/dev/%s-%s", DEVICENAMEPREFIX, id))
+			annotationKey := devPath
+			containerResp.Annotations[annotationKey] = ""
+			logger.Info("set annotation", "annotation name", annotationKey, "value", containerResp.Annotations[annotationKey])
+
+			containerResp.Devices = append(containerResp.Devices, &k8sdeviceplugin.DeviceSpec{
+				HostPath:      devPath,
+				ContainerPath: devPath,
+				Permissions:   "rw",
+			})
+			logger.Info("setting device file", "hostPath", devPath, "containerPath", devPath)
 		}
 		resp.ContainerResponses = append(resp.ContainerResponses, containerResp)
 	}
@@ -133,12 +126,6 @@ func main() {
 	var configFile string
 	flag.StringVar(&configFile, "config", "", "The path to the configuration file.")
 	flag.Parse()
-
-	//err := preparePluginConfiguration(configFile, &devicePluginConfig, logger)
-	//if err != nil {
-	//	klog.Error(err, "could not parse the configuration file", "path", configFile)
-	//	os.Exit(1)
-	//}
 
 	socketName := fmt.Sprintf("%s.sock", DEVICENAMEPREFIX)
 	pluginSocketPath := fmt.Sprintf("/var/lib/kubelet/device-plugins/%s", socketName)
