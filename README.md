@@ -24,7 +24,7 @@ To achieve this we break the problem down into a number of chapters. Not all sol
 
 1. [Device Plugin](device_plugin/README.md)
 
-1. operators
+1. [Operator](operator/README.md)
 
 1. [Certification](certfication/README.md)
 
@@ -33,6 +33,8 @@ To achieve this we break the problem down into a number of chapters. Not all sol
 
 
 ## Related Operators
+
+[Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift)
 
 [Intel Technology Enabling for OpenShift](https://github.com/intel/intel-technology-enabling-for-openshift/tree/main) with it's related [device plugins](https://github.com/intel/intel-technology-enabling-for-openshift/tree/main)
 
