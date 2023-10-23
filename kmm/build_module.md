@@ -2,7 +2,7 @@
 
 ## Problem
 
-Pre-built driver containers reuires maintaing many different images covering every possible kernel version it may be deployed on, is there a better way?
+Pre-built driver containers require maintaining many different images covering every possible kernel version it may be deployed on, is there a better way?
 
 ## Solution
 
@@ -68,7 +68,7 @@ If the source code for your driver is available you can build the driver contain
 
 This approach moves the requirements for security patching and updating the driver container to the cluster, and allows the kmod provider to concentrate on their kmod without the overhead of maintaining an array of container images.
 
-On the other hand it requires the source code to be available to end users such as on github. It also obviously takes the exact build tools, kernel, and even version of the source code compiled out of the hands of the driver writers which can make supporting the driver complicated, if not impossible.
+On the other hand, it requires the source code to be available to end users such as on github. It also obviously takes the exact build tools, kernel, and even version of the source code compiled out of the hands of the driver writers which can make supporting the driver complicated, if not impossible.
 
 
 
