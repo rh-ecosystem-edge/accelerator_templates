@@ -18,7 +18,9 @@ Building a kernel module inside a Dockerfile is made more complicated by the lar
 
 1. [I want an easier way to build a driver container, the Driver Toolkit](driver_container_easy_way.md)
 
-1. [I need to run my driver container](driver_container_running.md)
+1. [I want to run my driver container with podman](driver_container_running.md)
+
+1. [I want to run my driver container on Openshift](../kmm/README.md)
 
 1. [I want to know why my driver container need to be run as privileged](Q_why_privileged.md)
 
