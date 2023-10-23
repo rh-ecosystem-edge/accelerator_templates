@@ -23,13 +23,13 @@ spec:
   selector:
     node-role.kubernetes.io/worker: "worker"
 
-apiVersion: kmm.sigs.x-k8s.io/v1beta1
-kind: Module
+apiVersion: v1
+kind: ConfigMap
 metadata:
   name: pt-char-dev-dockerfile
 spec:
   data:
-    dockerfile: |
+    Dockerfile: |
       FROM registry.redhat.io/openshift4/driver-toolkit-rhel9:v4.13.0-202308011445.p0.gd719bdc.assembly.stream as builder
  as builder
       ARG KERNEL_VERSION
