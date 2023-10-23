@@ -1,0 +1,12 @@
+apiVersion: pt.example.com/v1alpha1
+kind: Ptemplate
+metadata:
+  labels:
+    app.kubernetes.io/name: ptemplate
+    app.kubernetes.io/instance: ptemplate-sample
+    app.kubernetes.io/part-of: ptemplate-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: ptemplate-operator
+  name: ptemplate-sample
+spec:
+  # TODO(user): Add fields here
