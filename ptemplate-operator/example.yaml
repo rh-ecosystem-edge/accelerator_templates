@@ -1,14 +1,14 @@
 ---
-apiVersion: ptemplates.pt.example.com/v1alpha
+apiVersion: pt.example.com/v1alpha
 kind: Ptemplate
 metadata:
   name: consumer-pod
 spec:
   maxdev: 5 
   defaultmsg: ptemplate
-  consumerimage: quay.io/chrisp262/pt-device-plugin:consumer-latest
+  consumer: quay.io/chrisp262/pt-device-plugin:consumer-latest
   requiredDevices: 2
-  imageRepoSecret:
+  imagePullSecret:
     name: pt-char-pull-secret
   selector:
     node-role.kubernetes.io/worker: worker

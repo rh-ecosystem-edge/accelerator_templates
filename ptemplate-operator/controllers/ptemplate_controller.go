@@ -137,6 +137,13 @@ func getPodNames(pods []v1.Pod) []string {
 func (r *PtemplateReconciler) ReconcileModule(ctx context.Context, req ctrl.Request, ptResource *cachev1alpha1.Ptemplate) (*ctrl.Result, error) {
 	logger := log.FromContext(ctx)
 
+	if ptResource.Spec.MaxDev == 0 {
+		ptResource.Spec.MaxDev = 5
+	}
+	if ptResource.Spec.DevicePlugin == "" {
+		ptResource.Spec.DevicePlugin = "quay.io/chrisp262/pt-device-plugin:latest"
+	}
+
 	existingMod, err := r.getExistingModule(ctx, req.NamespacedName)
 	// if there is no kmm.module resource already exisiting then we need to create it
 	if err != nil {
@@ -265,9 +272,18 @@ func (r *PtemplateReconciler) getNewModule(ctx context.Context, ptResource *cach
 func (r *PtemplateReconciler) ReconcileConsumer(ctx context.Context, req ctrl.Request, ptResource *cachev1alpha1.Ptemplate) (*ctrl.Result, error) {
 	logger := log.FromContext(ctx)
 
+	// build the consumer name from the CR
 	consumerDSName := types.NamespacedName{
 		Namespace: req.NamespacedName.Namespace,
 		Name:      req.NamespacedName.Name + "-consumer",
+	}
+
+	// set some default values that are option in the Spec but we actually need
+	if ptResource.Spec.RequiredDev == 0 {
+		ptResource.Spec.RequiredDev = 1
+	}
+	if ptResource.Spec.ConsumerImage == "" {
+		ptResource.Spec.ConsumerImage = "quay.io/chrisp262/pt-device-plugin:consumer-latest"
 	}
 
 	existingDS, err := r.getExistingConsumer(ctx, consumerDSName)
