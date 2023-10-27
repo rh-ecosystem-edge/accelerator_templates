@@ -86,7 +86,6 @@ static int __init ptemplate_init(void)
     // copy the default string into the memory buffer at each devices offset
     msg_len = strlen(default_msg);
     if ( msg_len > buffersize){
-	//*(default_msg+buffersize)=0;
 	msg_len = buffersize-1;
     }
 

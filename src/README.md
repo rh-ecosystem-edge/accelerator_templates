@@ -42,4 +42,3 @@ The Kernel Module Management Operator manages the loading and unloading of kerne
 
 - [Install On Openshift](https://openshift-kmm.netlify.app/documentation/install/)
 
-
