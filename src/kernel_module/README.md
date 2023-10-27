@@ -61,9 +61,8 @@ rmmod ptemplate_char_dev
 ## Further Reading:
 There are many guides only to writing and building kernel modules. 
 
-* A good place to start is the RHEL documentation on kernel modules https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/managing_monitoring_and_updating_the_kernel/managing-kernel-modules_managing-monitoring-and-updating-the-kernel
-* Linux kernel documentation
-https://docs.kernel.org/kbuild/modules.html 
+* A good place to start is the [RHEL documentation on kernel modules](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/managing_monitoring_and_updating_the_kernel/managing-kernel-modules_managing-monitoring-and-updating-the-kernel)
+* [Linux kernel documentation](https://docs.kernel.org/kbuild/modules.html)
 
 
 

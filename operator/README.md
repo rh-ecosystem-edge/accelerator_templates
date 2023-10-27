@@ -7,7 +7,9 @@ An Operator is an extension to Kubernetes and Openshift that adds a Custom Resou
 
 ### The Ptemplate-operator example
 
-Our example [ptemplate-operator](ptemplate-operator) implements the `Ptemplate` resource type (or Kind). When a resource of this Kind is created Kubernetes notifies the ptemplate-operator instance which runs its Reconcile() function which then creates a number of other resources needed to run our example. It does this by creating a Module resource that `KMM` picks up and processes, and a `Daemonset` resource for or consumer pods that is picked up by core Kubernetes 
+Our example [ptemplate-operator](../src/ptemplate-operator) implements the `Ptemplate` resource type (or Kind). When a resource of this Kind is created Kubernetes notifies the ptemplate-operator instance which runs its Reconcile() function which then creates a number of other resources needed to run our example. It does this by creating a Module resource that `KMM` picks up and processes, and a `Daemonset` resource for or consumer pods that is picked up by core Kubernetes 
+
+e.g ([See here](../src/ptemplate-operator/example.yaml))
 
 ```
 apiVersion: ptemplates.pt.example.com/v1alpha
