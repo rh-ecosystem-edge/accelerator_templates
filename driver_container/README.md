@@ -1,30 +1,42 @@
 # Driver Container
 
-## Introduction
-
-To use a kernel module on Openshift it needs to be built into a container image which Openshift can then use to instantiate a pod. These images are commonly known as Driver Containers. 
-
-Driver containers are container images used for building and deploying out-of-tree kernel modules and drivers on container OSs like Red Hat Enterprise Linux CoreOS (RHCOS).
-
 Driver containers are the first layer of the software stack used to enable kernel modules on Kubernetes.
 
-Building a kernel module inside a Dockerfile is made more complicated by the large number of additional packages that are required for the build process (e.g. a C compiler). Getting these right can be an annoying process of trial and error, and leaving them in a driver-container that is deployed in production both bloats the container image (often by hundreds of MB), and leaves an additional attack surface for no value. The Driver Toolkit provides a workaround for this
+&nbsp;
+### The Problem
+OpenShift and Kubernetes clusters are designed not to allow (easy) access to the underlying operating system and only allow commands to be run via containers. Therefore to use a kernel module on OpenShift or Kubernetes it needs to be containerised. When the container is run as a pod it then needs to run the command to load the kernel module (either `insmod` or `modprobe`).  These images are commonly known as Driver Containers.
 
+Building a kernel module inside a Dockerfile is made more complicated by the large number of additional packages that are required for the build process (e.g. a C compiler), and the libraries that are needed that are tied to the exact kernel version the kmod will run on. Getting these right can be an annoying process of trial and error, and leaving them in a driver-container that is deployed in production both bloats the container image (often by hundreds of MB), and leaves an additional attack surface for no value. This process can be fiddly and repetitive.
+
+The Driver Toolkit removes this complexity and provides a simple framework for creating standardised Driver Containers
+
+
+### The Driver Toolkit
+
+The Driver Toolkit (DTK from now on) is a container image in the OpenShift payload which is meant to be used as a base image on which to build driver containers. The DTK image contains the kernel packages commonly required as dependencies to build or install kernel modules as well as a few tools needed in driver containers. The version of these packages will match the kernel version running on the RHCOS nodes in the corresponding OpenShift release.
+
+The list of the packages installed in the DTK can be found in the [Dockerfile](https://github.com/openshift/driver-toolkit/blob/master/Dockerfile).
+
+
+### Usage
+
+An example of using DTK on an OpenShift cluster using OpenShift's  BuildConfig resource type can be found at the [DTK github repository](https://github.com/openshift/driver-toolkit#example-usage). This is the recommended method for using it.
 
 
 ## Cookbook
 
-1. [I need to build a driver container from scratch](driver_container_hard_way.md)
+1. [I need to build a driver container from scratch without DTK](driver_container_hard_way.md)
 
-1. [I want an easier way to build a driver container, the Driver Toolkit](driver_container_easy_way.md)
+1. [I need to build a driver container with DTK without BuildConfig](driver_container_easy_way.md)
 
 1. [I want to run my driver container with podman](driver_container_running.md)
 
-1. [I want to run my driver container on Openshift](../kmm/README.md)
+1. [I want to run my driver container on OpenShift](../kmm/README.md)
 
 1. [I want to know why my driver container need to be run as privileged](Q_why_privileged.md)
 
 1. I need my driver at boot time
 
+
 ## Links
-* https://github.com/openshift/driver-toolkit
+* [Driver Toolkit on github](https://github.com/openshift/driver-toolkit)

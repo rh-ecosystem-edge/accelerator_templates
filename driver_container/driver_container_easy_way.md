@@ -1,15 +1,14 @@
-# I need an easier way to build a driver container
+# I need to build a driver container with DTK
 
 ## Problem
 
-Building a driver container from scratch is hard to get right, I need an easier, more reliable way to do it.
+You have your driver source code ready to compile, you want to use the Driver-Toolkit image, but can't use OpenShift BuildConfig resources for whatever reason,
 
 ## Solution
 
+While using a BuildConfig is the recommended solution for creating DTK based driver containers, it possible to use the DTK image within a standard Dockerfile, and build an image with `podman`
 
-The Driver Toolkit (DTK from now on) is a container image in the OpenShift payload which is meant to be used as a base image on which to build driver containers. The Driver Toolkit image contains the all the commonly needed packages to build or install kernel modules as well as a few tools needed in driver containers. The version of these packages will match the kernel version running on the RHCOS nodes in the corresponding OpenShift release.
-
-By using it as a base image for the builder stage our Dockerfile  for the ptemplate_char_dev driver container can be simplified like this:
+For example for the ptemplate_char_dev driver container a standalone [Dockerfile](./Dockerfile.easy) might look like:
 
 ```
 ARG KERNEL_VERSION
@@ -30,7 +29,7 @@ RUN depmod -b /opt ${KERNEL_VERSION}
 CMD [ "modprobe", "-d", "/opt", "ptemplate_char_dev"]
 ```
 
-Then as we did previously we build the driver container with:
+Then we build the driver container with podman via:
 
 ```
 podman build -f Dockerfile.hard --build-arg KERNEL_VERSION=$(uname -r) \
@@ -40,17 +39,15 @@ podman build -f Dockerfile.hard --build-arg KERNEL_VERSION=$(uname -r) \
 
 ## Discussion
 
-This Docker file works in a very similar way to the previous version, downloading the source code from github, and building it with `make`, then in the second stage copying over only the .ko file created to a clean minimal image. The big difference is that the first stage does not need to install the build tools first, this removes any issues with entitlements and the availability of packages.
-
-
+This Docker file works in a very similar way to the [non-DTK version](driver_container_hard_way.md), downloading the source code from github, and building it with `make`, then in the second stage copying over only the .ko file created to a clean minimal image. The big difference is that the first stage does not need to install the build tools first, this removes any issues with entitlements and the availability of packages.
 
 
 # Links
 
-* Driver Toolkit https://github.com/openshift/driver-toolkit
-* Dockerfile reference https://docs.docker.com/engine/reference/builder/
-* podman https://podman.io/ 
-* podman build https://docs.podman.io/en/latest/markdown/podman-build.1.html
+* [Driver Toolkit](https://github.com/openshift/driver-toolkit)
+* [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
+* [podman](https://podman.io/)
+* [podman build](https://docs.podman.io/en/latest/markdown/podman-build.1.html)
 
 
 
