@@ -15,7 +15,7 @@ The Kernel Module Management operator used for managing the deployment of kernel
 ### nfd
 The Node Feature Discovery operator and components used for adding a wide range of hardware labels to OpenShift nodes
 
-### Out-of-tree (oot) drivers
+### Out-of-tree (OOT) drivers
 Drivers and kernel modules that are maintained outside of the Linux source tree. They are distributed outside of the kernel source and maintained by third parties (who may be a Linux distribution provider or more commonly a hardware provider). As the kernel is updated the third-party is responsible for updating the driver to ensure compatibility.
 
 ### in-tree drivers

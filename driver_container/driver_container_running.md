@@ -20,7 +20,7 @@ Because the driver container exists after running `modprobe` unloading the kmod 
 podman run --privileged quay.io/example/pt-char-dev:5.14.0-284.25.1.el9_2.x86_64 rmmod ptemplate_char_dev
 ```
 
-To gain more control of this process, and to use with on Openshift the [Kernel Module Management](../kmm/README.md) operator automates the loading and unloading process.
+To gain more control of this process, and to use with on OpenShift the [Kernel Module Management](../kmm/README.md) operator automates the loading and unloading process.
 
 
 ## Discussion

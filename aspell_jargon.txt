@@ -23,3 +23,7 @@ CoreOS
 DaemonSet
 CLI
 PCI
+PCIe
+kubelet
+OOT
+enablement

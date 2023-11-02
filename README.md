@@ -42,7 +42,14 @@ Hardware Operators are built up from a number of components not all solutions wi
 
 1. [Certification](certfication/README.md)
 
+1. [Support](support.md)
+
+**Appendices**
+
+1. [Checklist](Checklist.md)
+
 1. [Glossary Of Terms](GLOSSARY.md)
+
 
 
 &nbsp;
