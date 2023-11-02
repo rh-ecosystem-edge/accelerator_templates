@@ -22,4 +22,6 @@ Device Plugins provide a way to extend the resource concept to allow pods to res
 
 * [Simple Device Plugin](https://github.com/yevgeny-shnaidman/simple-device-plugin/) an example device plugin configurable via a file.
 
+* [K8s Dummy Device Plugin](https://github.com/redhat-nfvpe/k8s-dummy-device-plugin) (for testing purpose only)
+
 * [The NVIDIA device plugin for Kubernetes ](https://github.com/NVIDIA/k8s-device-plugin)
