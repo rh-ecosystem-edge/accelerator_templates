@@ -1,0 +1,25 @@
+personal_ws-1.1 en 10
+BuildConfig
+DTK
+Dockerfile
+Kubernetes
+OpenShift
+OpenShift's
+RHCOS
+github
+kmod
+podman
+ko
+dev
+ptemplate
+PTemplate
+UBI
+ubi
+RHEL
+GPL
+kmm
+nfd
+CoreOS
+DaemonSet
+CLI
+PCI
