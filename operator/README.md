@@ -24,7 +24,7 @@ An Operator is an extension to Kubernetes and OpenShift that adds a Custom Resou
 
 ## The Ptemplate-operator example
 
-Our example [ptemplate-operator](../src/ptemplate-operator) implements the `Ptemplate` resource type (or Kind). When a resource of this Kind is created Kubernetes notifies the ptemplate-operator instance which runs its Reconcile() function which then creates a number of other resources needed to run our example. It does this by creating a Module resource that `KMM` picks up and processes, and a `DaemonSet` resource for or consumer pods that is picked up by core Kubernetes 
+Our example [ptemplate-operator](../src/ptemplate-operator) implements the `Ptemplate` resource type (or Kind). When a resource of this Kind is created Kubernetes notifies the ptemplate-operator instance which runs its Reconcile() function which then creates a number of other resources needed to run our example. It does this by creating a Module resource that `KMM` picks up and processes, and a `DaemonSet` resource for or consumer pods that is picked up by core Kubernetes
 
 e.g ([See here](../src/ptemplate-operator/example.yaml))
 
@@ -53,7 +53,7 @@ Once its generated all the code, a minimum the following files need customising 
 
 #### api/v1alpha1/ptemplate_types.go
 This contains the data types that define the Custom Resources specification as a series of nested golang structures. Each field has a `json:`  tag that is used to define the associated field in the yaml (or json) used to create the resource
-e.g. 
+e.g.
 ```
 ConsumerImage   string                   `json:"consumer"`
 ```
@@ -61,16 +61,16 @@ means that if a `consumer` field is defined in the yaml that value is used to po
 
 
 #### controllers/ptemplate_controller.go
-The heart of the operator is the Reconcile() function in this file which implements the actual functionality. 
+The heart of the operator is the Reconcile() function in this file which implements the actual functionality.
 
-This function is run whenever an object of a type owned by the operator (listed in the `SetupWithManager()` function), so it needs to be idempotent. 
+This function is run whenever an object of a type owned by the operator (listed in the `SetupWithManager()` function), so it needs to be idempotent.
 In the ptemplate-operator we own a DaemonSet so reconcile is run for each ptemplate resource, whenever any DaemonSet in the cluster is changed. It needs to get the configuration for the relevant ptemplate resource, check the sub-resources that should exist (in this case a KMM Module, and a DaemonSet) and reconcile them, creating them if they do not exist, correcting them if they differ from the `ptemplate.Spec` , update the `ptemplate.Status` if needed, and most importantly of all, do nothing if nothing has changed.
 
 For production purposes it would make sense to break [this file](../ptemplate-operator/controllers/ptemplate_controller.go) into separate files for the Module and consumer DaemonSet, remove some of the logging, handle errors better, and generally do all the things that turn example code into production quality. But that would also reduce its clarity!
 
 
 #### config/rbac/role.yaml
-By default the operator only has permissions on its own CRD, to be able to access any other resource in the cluster (e.g. to list, and create DaemonSets or Pods) permissions need to be added to this file. These then get deployed as part of the operator-manager-role e.g. 
+By default the operator only has permissions on its own CRD, to be able to access any other resource in the cluster (e.g. to list, and create DaemonSets or Pods) permissions need to be added to this file. These then get deployed as part of the operator-manager-role e.g.
 ```
  kubectl get clusterrole ptemplate-operator-manager-role
 ```
@@ -79,14 +79,14 @@ If the operator logs show permissions errors this is probably the file that need
 
 
 #### Makefile
-The variable `IMAGE_TAG_BASE` was set to have the required image name and registry, for convenience. 
+The variable `IMAGE_TAG_BASE` was set to have the required image name and registry, for convenience.
 
 
 ## Installing
 
 ### Building And Deploying
 
-Building the operator is as easy as running ` make build` this will also regenerate any of the boilerplate code to reflect changes in the API (`api/v1alpha1/ptemplate_types.go`). 
+Building the operator is as easy as running ` make build` this will also regenerate any of the boilerplate code to reflect changes in the API (`api/v1alpha1/ptemplate_types.go`).
 
 
 Once the code is building successfully you can build the operator image running the `docker-build` target
@@ -121,7 +121,7 @@ Any errors during the resource creation process can be seen in the controllers l
 e.g.
 
 ```
-kubectl logs -n ptemplate-operator-system ptemplate-operator-controller-manager-5d4795f966-4cb98 
+kubectl logs -n ptemplate-operator-system ptemplate-operator-controller-manager-5d4795f966-4cb98
 ```
 
 ## Uninstalling
@@ -141,8 +141,8 @@ make undeploy
 ```
 
 ## Links
-* [Operator SDK](https://sdk.operatorframework.io/docs/building-operators/golang/quickstart/) 
+* [Operator SDK](https://sdk.operatorframework.io/docs/building-operators/golang/quickstart/)
 
-* [Kubernetes API](https://kubernetes.io/docs/reference/kubernetes-api/) 
+* [Kubernetes API](https://kubernetes.io/docs/reference/kubernetes-api/)
 
 * [Kubebuilder](https://book.kubebuilder.io/introduction) is not technically the same as the Operator SDK but is close enough to provide a good alternate view when the Operator SDK docs fail you

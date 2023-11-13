@@ -2,7 +2,7 @@
 
 ## Solution
 
-The default NFD configuration adds labels for a wide range of useful features. 
+The default NFD configuration adds labels for a wide range of useful features.
 
 [See here](cpu_flags.yaml)
 

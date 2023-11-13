@@ -37,7 +37,7 @@ spec:
             feature: kernel.selinux
             matchOn:
               - op: IsTrue
-          ## adds the feature.node.kubernetes.io/ptemplate_char_dev.present=true label 
+          ## adds the feature.node.kubernetes.io/ptemplate_char_dev.present=true label
           - name: "my ptemplate_char_dev rule"
             labels:
               "ptemplate_char_dev.present": "true"
