@@ -1,10 +1,11 @@
+---
 apiVersion: nfd.kubernetes.io/v1
 kind: NodeFeatureDiscovery
 metadata:
   name: pt-nfd-config
   namespace: node-feature-discovery-operator
 spec:
-  instance: "" ## instance is empty by default
+  instance: ""  ## instance is empty by default
   operand:
     image: gcr.io/k8s-staging-nfd/node-feature-discovery:master-minimal
     imagePullPolicy: Always
@@ -21,11 +22,14 @@ spec:
             - "DMI"
         pci:
           deviceClassWhitelist:
-            ## /sys/bus/pci/devices/0000:04:00.0/class with the 0x stripped and truncated to 4 chars
-            ## adds the feature.node.kubernetes.io/pci-0100_1af4_1042_1af4_1100.present=true label
+            ## contents of /sys/bus/pci/devices/0000:04:00.0/class with the 0xi
+            ## stripped and truncated to 4 chars
+            ## adds the
+            ## feature.node.kubernetes.io/pci-0100_1af4_1042_1af4_1100.present=true label
             - "0100"
           deviceLabelFields:
-            ## these, plus "sriov_totalvfs", "iommu_group/type", "iommu/intel-iommu/version" are the only attributes exposed by NFD
+            ## these, plus "sriov_totalvfs", "iommu_group/type", "iommu/intel-iommu/version"
+            ## are the only attributes NFD exposes
             - "class"
             - "vendor"
             - "device"
@@ -37,6 +41,7 @@ spec:
             feature: kernel.selinux
             matchOn:
               - op: IsTrue
+          #---
           ## adds the feature.node.kubernetes.io/ptemplate_char_dev.present=true label
           - name: "my ptemplate_char_dev rule"
             labels:
@@ -45,4 +50,3 @@ spec:
               - feature: kernel.loadedmodule
                 matchExpressions:
                    ptemplate_char_dev: {op: Exists}
-

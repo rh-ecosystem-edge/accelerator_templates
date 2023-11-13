@@ -1,3 +1,4 @@
+---
 apiVersion: nfd.k8s-sigs.io/v1alpha1
 kind: NodeFeatureRule
 metadata:
@@ -10,4 +11,4 @@ spec:
       matchFeatures:
         - feature: cpu.model
           matchExpressions:
-            family: {op: In, value: ["6", "7","8"]}
+            family: {op: In, value: ["6", "7", "8"]}

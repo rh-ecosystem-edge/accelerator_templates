@@ -31,7 +31,6 @@ spec:
   data:
     Dockerfile: |
       FROM registry.redhat.io/openshift4/driver-toolkit-rhel9:v4.13.0-202308011445.p0.gd719bdc.assembly.stream as builder
- as builder
       ARG KERNEL_VERSION
       WORKDIR /usr/src
       RUN ["git", "clone", "https://github.com/chr15p/partner_templates.git"]

@@ -1,10 +1,11 @@
+---
 apiVersion: nfd.kubernetes.io/v1
 kind: NodeFeatureDiscovery
 metadata:
   name: pt-nfd-config
   namespace: node-feature-discovery-operator
 spec:
-  instance: "" ## instance is empty by default
+  instance: ""  ## instance is empty by default
   operand:
     image: registry.k8s.io/nfd/node-feature-discovery:v0.13.4
     imagePullPolicy: Always
@@ -16,7 +17,7 @@ spec:
       sources:
         pci:
           deviceClassWhitelist:
-            ## The PCI class, and (optionally) the subclass , e.g. "01" is also valid
+            ## The PCI class, and (optional) subclass, e.g. "01" is also valid
             - "0100"
           deviceLabelFields:
             - "class"
