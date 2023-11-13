@@ -28,11 +28,11 @@ this will add the label `feature.node.kubernetes.io/fuse-kmod=true`  if the fuse
 
 It will add this label as long as the NFD operator is installed, regardless of other configuration it may have.
 
-## Discussion 
+## Discussion
 
 NodeFeatureRule objects provide an easy way to create vendor or application specific labels. It uses a flexible rule-based mechanism for creating labels based on node features. It also makes it easier to use custom label names within the `feature.node.kubernetes.io` namespace.
 
-These rules can be used for anything that the NodeFeatureDiscovery resource can label but has much greater flexability, not only allowing customised labels, but also allowing complex rules to be used with labels that depend on multiple features being present.
+These rules can be used for anything that the NodeFeatureDiscovery resource can label but has much greater flexibility, not only allowing customised labels, but also allowing complex rules to be used with labels that depend on multiple features being present.
 
 For example
 
@@ -43,7 +43,7 @@ metadata:
   name: redhat-scsi-controller
 spec:
   rules:
-    - name: "my scsi rule"
+    - name: "my SCSI rule"
       labels:
         "redhat-scsi-controller": "true"
       matchFeatures:
@@ -55,7 +55,7 @@ spec:
 ```
 
 Which adds a label `feature.node.kubernetes.io/redhat-scsi-controller=true`
-if a pci device with the class of `0100` (a scsi controller) and also a vendor code of `1af4` (Red Hat) exists on the system. We could allow for multiple classes from the same vendor by adding to the `class` expression, e.g
+if a PCI device with the class of `0100` (a SCSI controller) and also a vendor code of `1af4` (Red Hat) exists on the system. We could allow for multiple classes from the same vendor by adding to the `class` expression, e.g
 
 ```
 class: {op: In, value: ["0100", "0300"]}

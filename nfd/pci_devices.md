@@ -1,8 +1,8 @@
 # I want to customise NFD to label nodes with a given PCI device
 
-## Solution 
+## Solution
 
-NFD can be configured to add labels if a device with a given PCI class is present. 
+NFD can be configured to add labels if a device with a given PCI class is present.
 
 For example:
 
@@ -36,17 +36,17 @@ spec:
 ```
 
 
-This will label the node with 
+This will label the node with
 `feature.node.kubernetes.io/pci-0100_1af4_1042_1af4_1100.present=true` if the appropriate device exists (in this case a Red Hat, Inc. Virtio SCSI controller)
 
-The `deviceLabelFields` entries determine what information the label encodes, in this case if a ddevice with the whitelisted class exists it results in `pci-<class>_<vendor>_<subsystem_vendor>_<subsystem_device>.present=true` 
+The `deviceLabelFields` entries determine what information the label encodes, in this case if a device with the whitelisted class exists it results in `pci-<class>_<vendor>_<subsystem_vendor>_<subsystem_device>.present=true`
 
 
 ## Discussion
 
 Certain workloads required very specialist hardware to be available and for scheduling pods that perform those tasks being able to reference a label in their selector is vital.
 
-The PCI class of a device provides the type of that device, so the `0100` device in our example above identifies it as a SCSI controllers, if its class was reported as `0201` it would be a Token Ring controller(!).  These break down into two codes, the first two numbers (`01`) refers to Storage Controllers, and the second two gives the subclass where `00` identifies SCSI devices. `02` identifies a network controller, and a subclass of `01` is a Token Ring controller (more usefully `0200` is the class of Ethernet controllers and `0207` Infiniband controlelrs). 
+The PCI class of a device provides the type of that device, so the `0100` device in our example above identifies it as a SCSI controllers, if its class was reported as `0201` it would be a Token Ring controller(!).  These break down into two codes, the first two numbers (`01`) refers to Storage Controllers, and the second two gives the subclass where `00` identifies SCSI devices. `02` identifies a network controller, and a subclass of `01` is a Token Ring controller (more usefully `0200` is the class of Ethernet controllers and `0207` InfiniBand controllers).
 
 On a running Linux box the PCI classes of installed devices can be found either by the `lspci -nn` command or via the `/sys/bus/pci/devices/` directory structure which lists all the addresses on the PCI bus and the devices they address.
 

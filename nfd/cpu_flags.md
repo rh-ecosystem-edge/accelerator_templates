@@ -77,5 +77,5 @@ NFD can produce a wide range of labels based on the nodes hardware and OS, even 
 
 ## Links
 
-* [NFD sources.cpu reference](https://kubernetes-sigs.github.io/node-feature-discovery/v0.13/reference/worker-configuration-reference.html)
+* [NFD sources.CPU reference](https://kubernetes-sigs.github.io/node-feature-discovery/v0.13/reference/worker-configuration-reference.html)
 
