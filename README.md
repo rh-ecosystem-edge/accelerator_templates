@@ -15,9 +15,12 @@ Partner Templates is made up of three sections
 
 * [The "Partner Templates Cookbook"](#Cookbook): A collection of solutions, links, and FAQs to provide help for developers getting started with adding OpenShift support to their hardware.
 
-* [Links and Related Operators](#Links and Related Operators): A collections of Links to useful resources and real-world implementations to provide examples of how other people have approached the subject.
+* [Links and Related Operators](#links-and-related-operators): A collections of Links to useful resources and real-world implementations to provide examples of how other people have approached the subject.
 
 &nbsp;
+
+&nbsp;
+
 **NOTE: If there is something you think needs adding, expanding, or correcting, please file an Issue, or even better raise a PR**
 
 &nbsp;
