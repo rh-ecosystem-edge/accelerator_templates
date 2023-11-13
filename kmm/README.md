@@ -2,9 +2,9 @@
 
 ## Introduction
 
-The Kernel Module Management Operator is designed too manage out-of-tree kernel modules in Kubernetes and Openshift. It does this by managing the loading and unloading of driver-containers across the cluster using node selectors to determine which nodes require the driver deployed. Optionally it can also manage the building of driver containers and signing the kernel modules themselves for secureboot installations.
+The Kernel Module Management Operator is designed too manage out-of-tree kernel modules in Kubernetes and OpenShift. It does this by managing the loading and unloading of driver-containers across the cluster using node selectors to determine which nodes require the driver deployed. Optionally it can also manage the building of driver containers and signing the kernel modules themselves for SecureBoot installations.
 
-The KMM operator implements its own Custom Resource definition for resources of `kind: Module`. When a `Module` resource is defined KMM creates a daemonset that runs the referenced driver container on each of the nodes with the command
+The KMM operator implements its own Custom Resource definition for resources of `kind: Module`. When a `Module` resource is defined KMM creates a DaemonSet that runs the referenced driver container on each of the nodes with the command
 
 ```
 /bin/sh -c modprobe -v -d "/opt" "[driver_name]"
@@ -25,12 +25,12 @@ To check what Modules have been created in a cluster you can use `kubectl get mo
 
 ## Cookbook
 
-* [I want to deploy a pre-built driver container with KMM](load_module.md)
+* [I want to deploy a prebuilt driver container with KMM](load_module.md)
 * [I want to manage which nodes my driver is loaded on](node_selectors.md)
 * [I want to load different drivers on different kernels](different_kernels.md)
 * [I need KMM to build my driver containers for me](build_module.md)
-* [I use secureboot and need my drivers signed before loading](secureboot.md)
-* [I want to load multiple kmods]
+* [I use SecureBoot and need my drivers signed before loading](secureboot.md)
+* [I want to load multiple kernel modules]
 * [I want to load custom firmware with my driver](loading_firmware.md)
 * [I need to unload an in-tree driver and replace it with my new out-of-tree version]
 
@@ -38,6 +38,6 @@ To check what Modules have been created in a cluster you can use `kubectl get mo
 ## Links
 
 * [KMM's Upstream documentation](https://kmm.sigs.k8s.io)
-* [Openshift NFD documentation](https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html)
-* [Upstream Repo](https://github.com/kubernetes-sigs/kernel-module-management/) where most development work is done.
-* [KMM's Openshift Repo](https://github.com/rh-ecosystem-edge/kernel-module-management/) forms the basis for the Openshift release of KMM. Upstream changes are merged into here regularly, and Openshift specific development and testing is performed.
+* [OpenShift NFD documentation](https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html)
+* [Upstream Repository](https://github.com/kubernetes-sigs/kernel-module-management/) where most development work is done.
+* [KMM's OpenShift Repository](https://github.com/rh-ecosystem-edge/kernel-module-management/) forms the basis for the OpenShift release of KMM. Upstream changes are merged into here regularly, and OpenShift specific development and testing is performed.

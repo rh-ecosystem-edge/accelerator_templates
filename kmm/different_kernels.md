@@ -1,8 +1,8 @@
-# I need to deploy my driver container on multiple kernels Openshift.
+# I need to deploy my driver container on multiple kernels OpenShift.
 
 ## Problem
 
-Different versions of Openshift come with different kernels, and each new kernel version potentially requires changes in kernel modules, so to build a generic Module resource you need to be able to respond to these different versions.
+Different versions of OpenShift come with different kernels, and each new kernel version potentially requires changes in kernel modules, so to build a generic Module resource you need to be able to respond to these different versions.
 
 ## Solution
 
@@ -28,7 +28,7 @@ This set of mappings will load a specific driver container for any node running 
 
 ## Discussion
 
-The regexp setting uses the golang regular expression syntax so can support complex regular expressions, and the mappings are tested in the order they are given from the top down. Together this makes it possible to support a wide range of different kernels from the same `module` resource, including not just different releases of Openshift, or different versions of the underlying OS, but different versions of Linux entirely. 
+The regexp setting uses the golang regular expression syntax so can support complex regular expressions, and the mappings are tested in the order they are given from the top down. Together this makes it possible to support a wide range of different kernels from the same `module` resource, including not just different releases of OpenShift, or different versions of the underlying OS, but different versions of Linux entirely. 
 
 ## Links
 

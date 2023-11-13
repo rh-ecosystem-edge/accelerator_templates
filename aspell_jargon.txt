@@ -18,6 +18,8 @@ ubi
 RHEL
 GPL
 kmm
+KMM
+KMM's
 nfd
 CoreOS
 DaemonSet
@@ -58,3 +60,9 @@ Virtio
 InfiniBand
 sysfs
 Kaby
+ABI
+modprobe
+prebuilt
+SecureBoot
+UEFI
+MOK

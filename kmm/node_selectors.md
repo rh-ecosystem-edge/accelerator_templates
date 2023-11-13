@@ -4,7 +4,7 @@
 
 You only want to load a driver on nodes that have the particular piece of hardware that it enables.
 
-## Solution 
+## Solution
 
 Kubernetes offers a robust labelling and selector system that KMM can use to select the nodes to load your kmod on.
 
@@ -49,7 +49,7 @@ This should now only install our ptemplate_char_dev kernel module on nodes that 
 
 ## Discussion
 
-You can check what labesl a node has with :
+You can check what labels a node has with :
 
 ```
 kubectl get nodes --show-labels
@@ -72,15 +72,15 @@ kube93.cp.chrisprocter.co.uk   Ready    worker   186d   v1.27.4
 While it might seem that labels are an ideal place to store data they do come with some restrictions, valid label values:
 
 *   must be 63 characters or less (can be empty),
-*    unless empty, must begin and end with an alphanumeric character ([a-z0-9A-Z]),
-*   could contain dashes (-), underscores (_), dots (.), and alphanumerics between.
+*   unless empty, must begin and end with an alphanumeric character ([a-z0-9A-Z]),
+*   could contain dashes (-), underscores (_), dots (.), with alphanumeric characters between.
 
 
 
 Several useful labels are added to nodes by default including `kubernetes.io/hostname` and `kubernetes.io/arch`, and then kmm itself adds several more, such as the kernel version `
-kmm.node.kubernetes.io/kernel-version.full` and a label for each of the kernel modules it has loaded `kmm.node.kubernetes.io/pt-char-dev.ready`.  These are very useful for things like only loading kmods on the architecture they are compiled for or for only loading them when other pre-requisite modules already exist.
+kmm.node.kubernetes.io/kernel-version.full` and a label for each of the kernel modules it has loaded `kmm.node.kubernetes.io/pt-char-dev.ready`.  These are very useful for things like only loading kernel modules on the architecture they are compiled for or for only loading them when other prerequisite modules already exist.
 
-Other operators will add their own labels, or especial note is the the Node Feature Discovery operator whose entire purpose is to automatically label nodes based on hardware features such as pci or usb hardware available, and cpu features
+Other operators will add their own labels, or especial note is the the Node Feature Discovery operator whose entire purpose is to automatically label nodes based on hardware features such as pci or USB hardware available, and cpu features
 
 
 

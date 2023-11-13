@@ -1,13 +1,13 @@
-# I dont want to worry about maintaining many driver containers
+# I don't want to worry about maintaining many driver containers
 
 ## Problem
 
-Pre-built driver containers require maintaining many different images covering every possible kernel version it may be deployed on, is there a better way?
+Prebuilt driver containers require maintaining many different images covering every possible kernel version it may be deployed on, is there a better way?
 
 ## Solution
 
 
-The kernelMappings.build section of the Module resource takes the name of a `ConfigMap` resource that contains the Dockerfile required to create the driver container. So our example ptemplate_char_dev.ko loader would look like:
+The `kernelMappings.build` section of the Module resource takes the name of a `ConfigMap` resource that contains the Dockerfile required to create the driver container. So our example ptemplate_char_dev.ko loader would look like:
 
 ([see full file](build_module.yaml))
 
@@ -64,7 +64,7 @@ spec:
 
 ## Discussion
 
-If the source code for your driver is available you can build the driver container "in-cluster" using KMMs `build` parameter.  This allows the Openshift cluster to build its own driver container customised for its own kernel version (or versions if they're not homogeneous.
+If the source code for your driver is available you can build the driver container "in-cluster" using KMM's `build` parameter.  This allows the OpenShift cluster to build its own driver container customised for its own kernel version (or versions if they're not homogeneous.
 
 This approach moves the requirements for security patching and updating the driver container to the cluster, and allows the kmod provider to concentrate on their kmod without the overhead of maintaining an array of container images.
 

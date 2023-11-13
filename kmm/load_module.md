@@ -1,7 +1,7 @@
-# I want to deploy a pre-built driver container with KMM
+# I want to deploy a prebuilt driver container with KMM
 
 ## Problem
-You have a pre-built Driver Container and want to load it on all the nodes in a cluster that match a particular criteria
+You have a prebuilt Driver Container and want to load it on all the nodes in a cluster that match a particular criteria
 
 
 ## Solution
@@ -39,7 +39,7 @@ Then apply this file with `oc apply -f module.yaml` or `kubectl apply -f module.
 
 ## Discussion
 
-The above yaml defines a `Module` resource that the KMM operator will read and use to create a number of child resources including a daemonset and pods.
+The above yaml defines a `Module` resource that the KMM operator will read and use to create a number of child resources including a DaemonSet and pods.
 
 There are a number of fields that are worth looking at in more detail.
 
@@ -59,12 +59,12 @@ These fields are combined by KMM to build the command line. In our example this 
 
 ### The spec.moduleLoader.imagePullPolicy field
 
-The `imagePullPolicy` setting is the simplest to understand, it simply determines when Openshift should pull the Driver Container image from the registry and when it should use a locally cached version. Generally it is advisable to set this to `Always` especially when debugging, there is nothing as frustrating as spending hours trying to hunt down a bug only to find you've been updating the registry and Openshift has been using the same cached image all the time.
+The `imagePullPolicy` setting is the simplest to understand, it simply determines when OpenShift should pull the Driver Container image from the registry and when it should use a locally cached version. Generally it is advisable to set this to `Always` especially when debugging, there is nothing as frustrating as spending hours trying to hunt down a bug only to find you've been updating the registry and OpenShift has been using the same cached image all the time.
 
 
 ### The spec.moduleLoader.kernelMappings section
 
-The last section gives the name of the Driver Container image with the kernel module in it that Openshift should pull down and run.
+The last section gives the name of the Driver Container image with the kernel module in it that OpenShift should pull down and run.
 
 As the kernel ABI can change between different kernel versions, different distributions can have different kernel version schemes, and sometimes you just want different functionality on different OS versions its possible use regular expressions matching against the running kernel version, to define which Driver Container gets used.
 
