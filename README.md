@@ -15,8 +15,6 @@ Partner Templates is made up of three sections
 
 * [Links and Related Operators](#links-and-related-operators): A collections of Links to useful resources and real-world implementations to provide examples of how other people have approached the subject.
 
-&nbsp;
-
 ## Cookbook
 
 Hardware Operators are built up from a number of components not all solutions will need to use all of these and we have attempted to make each section as stand alone as possible.
@@ -45,10 +43,6 @@ Hardware Operators are built up from a number of components not all solutions wi
 
 1. [Glossary Of Terms](GLOSSARY.md)
 
-&nbsp;
-
-&nbsp;
-
 ## Links and Related Operators
 
 [Glossary](glossary.md) a collection of useful terms.
@@ -59,6 +53,6 @@ Hardware Operators are built up from a number of components not all solutions wi
 
 &nbsp;
 
-### Corrections and Omissions
+## Corrections and Omissions
 
 If there is something you think needs adding, expanding, or correcting, please file an Issue, or even better raise a PR

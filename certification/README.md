@@ -7,10 +7,9 @@ Container images and Operators are certified separately
 
 These are broken into two sections, the [Red Hat OpenShift Software Certification Policy Guide](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.69/html/red_hat_openshift_software_certification_policy_guide) which describes the requirements that must be met for certification, and the [Red Hat Software Certification Workflow Guide](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.69/html/red_hat_software_certification_workflow_guide) which covers the steps needed to achieve certification.
 
-
 ## Red Hat Partner Program
-An important prerequisite for certification is to become part of the [Red Hat Partner Program](https://connect.redhat.com/en/programs) and specifically to view the [Red Hat OpenShift Certification](https://connect.redhat.com/en/partner-with-us/red-hat-openshift-certification) pages.
 
+An important prerequisite for certification is to become part of the [Red Hat Partner Program](https://connect.redhat.com/en/programs) and specifically to view the [Red Hat OpenShift Certification](https://connect.redhat.com/en/partner-with-us/red-hat-openshift-certification) pages.
 
 ## Certifying Container Images
 
@@ -22,8 +21,6 @@ Once you are confident that your container meets the policy requirements you nee
 
 They should also meet the Partner Documentation requirements in [Chapter 6](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.69/html/red_hat_openshift_software_certification_policy_guide/con-partner-documentation-requirements_openshift-sw-cert-policy-specialized-certification)
 
-
-
 ## Certifying Operators
 
 Each container managed by the Operator (Operands) must be certified by Red Hat and must meet the requirements listed in the Requirements for container images section. Once that is done the Operator as a whole also needs to be certified and so needs to meet the technical and operational certification requirements outlined in [Chapter 3](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.69/html/red_hat_openshift_software_certification_policy_guide/assembly-products-managed-by-an-operator_openshift-sw-cert-policy-container-images#doc-wrapper) of the [Red Hat OpenShift Software Certification Policy Guide](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.69/html/red_hat_openshift_software_certification_policy_guide/index)
@@ -33,10 +30,6 @@ Then, similar to the Container Images,
 details the process to generate the test results and submit them to Red Hat to receive certification.
 
 [![Container certification workflow](https://access.redhat.com/webassets/avalon/d/Red_Hat_Software_Certification-8.69-Red_Hat_Software_Certification_Workflow_Guide-en-US/images/f11867f77394c6edcbd3be409a64ee90/operatorworkflow.png)](https://access.redhat.com/documentation/en-us/red_hat_software_certification/8.69/html/red_hat_software_certification_workflow_guide/assembly_working-with-operators_openshift-sw-cert-workflow-publishing-the-certified-container)
-
-
-
-
 
 ## Links
 
