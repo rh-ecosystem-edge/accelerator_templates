@@ -6,7 +6,7 @@ The NodeFeatureRule custom resource allows the adding of multiple resources that
 
 For example:
 
-```
+```yaml
 apiVersion: nfd.k8s-sigs.io/v1alpha1
 kind: NodeFeatureRule
 metadata:
@@ -22,8 +22,6 @@ spec:
             fuse: {op: Exists}
 ```
 
-
-
 this will add the label `feature.node.kubernetes.io/fuse-kmod=true`  if the fuse kernel module is installed regardless of any other configuration (including any other  configuration that looks for the fuse kernel module)
 
 It will add this label as long as the NFD operator is installed, regardless of other configuration it may have.
@@ -36,7 +34,7 @@ These rules can be used for anything that the NodeFeatureDiscovery resource can 
 
 For example
 
-```
+```yaml
 apiVersion: nfd.k8s-sigs.io/v1alpha1
 kind: NodeFeatureRule
 metadata:
@@ -57,16 +55,15 @@ spec:
 Which adds a label `feature.node.kubernetes.io/redhat-scsi-controller=true`
 if a PCI device with the class of `0100` (a SCSI controller) and also a vendor code of `1af4` (Red Hat) exists on the system. We could allow for multiple classes from the same vendor by adding to the `class` expression, e.g
 
-```
+```yaml
 class: {op: In, value: ["0100", "0300"]}
 ```
 
 This means that if a device from either of those classes exists, that also has the vendor id of `1af4` the label will be added.
 
-
 It's also possible to create rules with many expressions utilising features from many features, with a whole range of different operators, for example:
 
-```
+```yaml
 apiVersion: nfd.k8s-sigs.io/v1alpha1
 kind: NodeFeatureRule
 metadata:
@@ -85,9 +82,6 @@ spec:
             X86: {op: In, value: ["y"]}
 ```
 
-
-
-
-
 ## Links
+
 * [NFD NodeFeatureRule documentation](https://kubernetes-sigs.github.io/node-feature-discovery/v0.14/usage/customization-guide.html#nodefeaturerule-custom-resource)

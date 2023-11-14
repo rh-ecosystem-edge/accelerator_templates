@@ -6,7 +6,7 @@ The default NFD configuration adds labels for a wide range of useful features.
 
 [See here](cpu_flags.yaml)
 
-```
+```yaml
 apiVersion: nfd.kubernetes.io/v1
 kind: NodeFeatureDiscovery
 metadata:
@@ -22,7 +22,7 @@ spec:
 
 Will add a whole range of default labels:
 
-```
+```bash
 feature.node.kubernetes.io/cpu-cpuid.ADX=true
 feature.node.kubernetes.io/cpu-cpuid.AESNI=true
 feature.node.kubernetes.io/cpu-cpuid.AVX2=true
@@ -69,13 +69,10 @@ feature.node.kubernetes.io/system-os_release.VERSION_ID=9.2
 
 Which are then available for use in selectors including by `kmm`
 
-
 ## Discussion
 
 NFD can produce a wide range of labels based on the nodes hardware and OS, even the few that are available by default provide some highly useful information about the CPUs and OS that are running on the node.
 
-
 ## Links
 
 * [NFD sources.CPU reference](https://kubernetes-sigs.github.io/node-feature-discovery/v0.13/reference/worker-configuration-reference.html)
-

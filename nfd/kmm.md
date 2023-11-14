@@ -8,10 +8,9 @@ You want to use the labels NFD creates to determine where your driver is loaded.
 
 [KMM](../kmm/README.md) provides a `.selector` field to select which nodes its kernel module payload is deployed on.
 
-
 For example ([see full file](kmm.yaml)):
 
-```
+```yaml
   selector:
     feature.node.kubernetes.io/cpu-model.vendor_id: Intel
     feature.node.kubernetes.io/cpu-model.family: 6
@@ -27,7 +26,7 @@ The KMM selectors form a logical AND, the node must have all the labels for the 
 
 For these more complex setups you can use NFD rules to add a specific label based around the rules, for example (see [file](kmm_nfd_rule.yaml)):
 
-```
+```yaml
 apiVersion: nfd.k8s-sigs.io/v1alpha1
 kind: NodeFeatureRule
 metadata:
@@ -43,9 +42,8 @@ spec:
             family: {op: In, value: ["6", "7","8"]}
 ```
 
-
-
 ## Links
 
 * [KMM working with labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
+
 * [Kubernetes Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)

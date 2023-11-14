@@ -8,7 +8,7 @@ For example:
 
 [See here](pci_devices.yaml)
 
-```
+```yaml
 apiVersion: nfd.kubernetes.io/v1
 kind: NodeFeatureDiscovery
 metadata:
@@ -35,12 +35,10 @@ spec:
             - "subsystem_device"
 ```
 
-
 This will label the node with
 `feature.node.kubernetes.io/pci-0100_1af4_1042_1af4_1100.present=true` if the appropriate device exists (in this case a Red Hat, Inc. Virtio SCSI controller)
 
 The `deviceLabelFields` entries determine what information the label encodes, in this case if a device with the whitelisted class exists it results in `pci-<class>_<vendor>_<subsystem_vendor>_<subsystem_device>.present=true`
-
 
 ## Discussion
 
@@ -52,7 +50,8 @@ On a running Linux box the PCI classes of installed devices can be found either 
 
 Sysfs files such as `/sys/bus/pci/devices/0000:04:00.0/class` contain a 6 digit hex string that gives the Class, Sub-class, and Programming Interface which can provide more information about the device type. NFD only uses the Class and Sub-class, it strips off the Programming Interface.
 
-
 ## Links
+
 * [NFD PCI documentation](https://kubernetes-sigs.github.io/node-feature-discovery/v0.13/reference/worker-configuration-reference.html#sourcespci)
+
 * [PCI Code And ID Assignment Specification](https://pcisig.com/sites/default/files/files/PCI_Code-ID_r_1_12__v9_Jan_2020.pdf)
