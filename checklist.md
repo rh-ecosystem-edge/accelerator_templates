@@ -1,9 +1,8 @@
-## Operator Requirements
+# Operator Requirements
 
-### Goal:
 To capture requirements for operator development and enablement in OpenShift it is helpful to ask a series of questions. Not all are relevant to every solution but they are helpful for thinking about the components that make up the solution and how they will work together.
 
-### Kernel Modules
+## Kernel Modules
 
 * What is available/supported in-tree for which adaptors?
 * What is needed for out-of-tree support for which adaptors? What kernel modules/drivers and how many?
@@ -15,17 +14,17 @@ To capture requirements for operator development and enablement in OpenShift it 
 * Are there any proprietary libraries that need to be considered?
 * Are those modules going to be in-cluster built, or off-cluster built only?
 
-### Device plugin
+## Device plugin
 
 * Does this already exist?
 * What does kubelet need to know about the device?
 
-### PCIe
+## PCIe
 
 * How do these devices appear in the OS from a hardware perspective?
 * Can this be used for node labelling?
 
-### Workload Orchestration
+## Workload Orchestration
 
 * Is there an existing application that does this today?
 * How is this handled?

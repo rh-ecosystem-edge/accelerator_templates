@@ -7,21 +7,13 @@ Firstly access to the operating system is restricted. While it is possible to co
 Secondly RHCOS is designed to be immutable. This means rebooting the node deletes any changes made to the operating system.
 
 Together these make the traditional approach of installing packages of drivers and agent software that system administrators can install problematic. Instead a new approach of containerised drivers managed by OpenShift operators is required.
-
-
 Partner Templates is made up of three sections
 
 * [The PTemplate Operator](src/README.md): An example driver, Operator, and other code to provide a working example of one approach to implementing a driver solution on OpenShift or Kubernetes
 
-* [The "Partner Templates Cookbook"](#Cookbook): A collection of solutions, links, and FAQs to provide help for developers getting started with adding OpenShift support to their hardware.
+* [The "Partner Templates Cookbook"](#cookbook): A collection of solutions, links, and FAQs to provide help for developers getting started with adding OpenShift support to their hardware.
 
 * [Links and Related Operators](#links-and-related-operators): A collections of Links to useful resources and real-world implementations to provide examples of how other people have approached the subject.
-
-&nbsp;
-
-&nbsp;
-
-**NOTE: If there is something you think needs adding, expanding, or correcting, please file an Issue, or even better raise a PR**
 
 &nbsp;
 
@@ -47,18 +39,15 @@ Hardware Operators are built up from a number of components not all solutions wi
 
 1. [Support](support.md)
 
-**Appendices**
+#### Appendices
 
 1. [Checklist](Checklist.md)
 
 1. [Glossary Of Terms](GLOSSARY.md)
 
-
-
 &nbsp;
 
 &nbsp;
-
 
 ## Links and Related Operators
 
@@ -68,7 +57,8 @@ Hardware Operators are built up from a number of components not all solutions wi
 
 [Intel Technology Enabling for OpenShift](https://github.com/intel/intel-technology-enabling-for-openshift/tree/main) with it's related [device plugins](https://github.com/intel/intel-technology-enabling-for-openshift/tree/main)
 
+&nbsp;
 
+### Corrections and Omissions
 
-
-
+If there is something you think needs adding, expanding, or correcting, please file an Issue, or even better raise a PR
