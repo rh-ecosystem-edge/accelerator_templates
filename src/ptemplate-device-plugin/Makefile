@@ -1,8 +1,8 @@
 EXEC_NAME := ptemplate-device-plugin
 BASE_IMAGE ?= scratch
 GO_FILES ?= $$(find . -name '*.go' -not -path './vendor/*')
-REPO ?= quay.io/chrisp262/pt-device-plugin
-TAG ?= plugin-latest
+REPO ?= quay.io/chrisp262/pt-consumer
+TAG ?= latest
 IMG ?= $(REPO):$(TAG)
 
 CONSUMER_REPO=quay.io/chrisp262/pt-device-plugin

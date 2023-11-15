@@ -12,7 +12,7 @@ Use `podman build` and a multistage Dockerfile to build the image
 
 For example for the ptemplate_char_dev kernel module we create a Dockerfile with the following content:
 
-```
+```Dockerfile
 FROM registry.redhat.io/ubi9/ubi as builder
 ARG KERNEL_VERSION=''
 RUN dnf -y install \
@@ -45,11 +45,10 @@ CMD [ "modprobe", "-d", "/opt", "ptemplate_char_dev"]
 
 Then to build the driver container run:
 
-```
+```bash
 podman build -f Dockerfile.hard --build-arg KERNEL_VERSION=$(uname -r) \
-		-t quay.io/example/pt-char-dev:$(uname -r) .
+             -t quay.io/example/pt-char-dev:$(uname -r) .
 ```
-
 
 ## Discussion
 
@@ -59,15 +58,14 @@ This multi-stage approach results in a much smaller image. All the build require
 
 However there are significant issues with this approach. We need access to the correct repositories to install all the build components, which requires building on a host with Red Hat entitlements. We also require the kernel packages for the exact kernel version we are deploying to, so the above solution builds correctly on RHEL9 but you cannot use it for RHEL8 builds or for other Linux versions.
 
-This means you need multiple versions of this Dockerfile, one per OS version that the driver will be released for. 
+This means you need multiple versions of this Dockerfile, one per OS version that the driver will be released for.
 
-
-# Links
+## Links
 
 * [How to use entitled image builds to build Driver Containers with UBI on OpenShift](https://cloud.redhat.com/blog/how-to-use-entitled-image-builds-to-build-drivercontainers-with-ubi-on-openshift)
 
-* Dockerfile reference https://docs.docker.com/engine/reference/builder/
-* podman https://podman.io/ 
-* podman build https://docs.podman.io/en/latest/markdown/podman-build.1.html
+* [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 
+* [podman](https://podman.io/)
 
+* [podman build](https://docs.podman.io/en/latest/markdown/podman-build.1.html)
