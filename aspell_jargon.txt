@@ -66,3 +66,15 @@ prebuilt
 SecureBoot
 UEFI
 MOK
+GPU
+GPUs
+FPGA
+FPGAs
+gRPC
+DevicePlugin
+AllocateRequest
+ListAndWatch
+AppArmor
+SELinux
+seccomp
+Buildah

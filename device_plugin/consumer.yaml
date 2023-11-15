@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
     - name: consumer
-      image: quay.io/chrisp262/pt-device-plugin:consumer-latest
+      image: quay.io/chrisp262/pt-consumer:latest
       securityContext:
         privileged: true
       resources:
