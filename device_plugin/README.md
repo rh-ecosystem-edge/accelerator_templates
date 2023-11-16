@@ -6,6 +6,10 @@ To allow the addition of custom resource types Kubernetes provides the device pl
 
 Device Plugins provide a way to extend the resource concept to allow pods to reserve custom resources including devices. Instead of customising the code for Kubernetes itself, vendors can implement a device plugin that you deploy either manually or as a DaemonSet. The targeted devices include GPUs, high-performance network cards, FPGAs, InfiniBand adaptors, and other similar computing resources that may require vendor specific initialisation and setup.
 
+## The Ptemplate-device-plugin example
+
+For an example implementation [See here](../src/ptemplate-device-plugin/)
+
 ## Implementing A Device Plugins
 
 The kubelet exports a Registration gRPC service which the device plugin uses to register itself.

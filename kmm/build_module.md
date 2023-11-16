@@ -6,12 +6,11 @@ Prebuilt driver containers require maintaining many different images covering ev
 
 ## Solution
 
-
 The `kernelMappings.build` section of the Module resource takes the name of a `ConfigMap` resource that contains the Dockerfile required to create the driver container. So our example ptemplate_char_dev.ko loader would look like:
 
 ([see full file](build_module.yaml))
 
-```
+```yaml
 apiVersion: kmm.sigs.x-k8s.io/v1beta1
 kind: Module
 metadata:
@@ -61,7 +60,6 @@ spec:
       CMD [ "modprobe", "-d", "/opt", "ptemplate_char_dev"]
 ```
 
-
 ## Discussion
 
 If the source code for your driver is available you can build the driver container "in-cluster" using KMM's `build` parameter.  This allows the OpenShift cluster to build its own driver container customised for its own kernel version (or versions if they're not homogeneous.
@@ -70,9 +68,6 @@ This approach moves the requirements for security patching and updating the driv
 
 On the other hand, it requires the source code to be available to end users such as on github. It also obviously takes the exact build tools, kernel, and even version of the source code compiled out of the hands of the driver writers which can make supporting the driver complicated, if not impossible.
 
-
-
 ## Links
 
 * [KMM upstream documentation](https://kmm.sigs.k8s.io/documentation/module_loader_image/)
-

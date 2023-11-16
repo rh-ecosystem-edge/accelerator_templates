@@ -1,22 +1,32 @@
 # The Ptemplate-operator
 
-1. [Introduction](#Introduction)
-1. [The Ptemplate-operator example](#The Ptemplate-operator example)
-1. [Important Files](#Important Files)
-  1. [api/v1alpha1/ptemplate_types.go](#api/v1alpha1/ptemplate_types.go)
-  1. [controllers/ptemplate_controller.go](#controllers/ptemplate_controller.go)
-  1. [config/rbac/role.yaml](#config/rbac/role.yaml)
-  1. [Makefile](#Makefile)
+1. [Introduction](#introduction)
 
-1. [Installing](#Installing)
-  1. [Building And Deploying](#Building And Deploying)
-  1. [Creating An Instance](#Creating An Instance)
+2. [The Ptemplate-operator example](#the ptemplate-operator-example)
 
-1. [Uninstalling](#Uninstalling)
-  1. [Uninstall CRDs](#Uninstall CRDs)
-  1. [Undeploy controller](#Undeploy controller)
+3. [Important Files](#important-files)
 
-1. [Links](#links)
+    3.1. [api/v1alpha1/ptemplate_types.go](#apiv1alpha1ptemplate_typesgo)
+
+    3.2. [controllers/ptemplate_controller.go](#controllersptemplate_controllergo)
+
+    3.3. [config/rbac/role.yaml](#configrbacroleyaml)
+
+    3.4. [Makefile](#makefile)
+
+4. [Installing](#installing)
+
+    4.1. [Building And Deploying](#building-and-deploying)
+
+    4.2. [Creating An Instance](#creating-an-instance)
+
+5. [Uninstalling](#uninstalling)
+
+    5.1. [Uninstall CRDs](#uninstall-crds)
+
+    5.2. [Undeploy controller](#undeploy-controller)
+
+6. [Links](#links)
 
 ## Introduction
 
@@ -28,7 +38,7 @@ Our example [ptemplate-operator](../src/ptemplate-operator) implements the `Ptem
 
 e.g ([See here](../src/ptemplate-operator/example.yaml))
 
-```
+```yaml
 apiVersion: ptemplates.pt.example.com/v1alpha
 kind: Ptemplate
 metadata:
@@ -47,20 +57,23 @@ spec:
 Implementing an operator requires a large amount of boilerplate code.
 The easiest way to create this code is to use the operator-sdk. It's [QuickStart](https://sdk.operatorframework.io/docs/building-operators/golang/quickstart/) and [tutorial](https://sdk.operatorframework.io/docs/building-operators/golang/tutorial/) walks you through generating the boilerplate code for the operator and adding an API to it (which defines the yaml structure used to create the resource instance).
 
-
 ### Important Files
+
 Once its generated all the code, a minimum the following files need customising to implement the functionality that this Operator requires.
 
 #### api/v1alpha1/ptemplate_types.go
+
 This contains the data types that define the Custom Resources specification as a series of nested golang structures. Each field has a `json:`  tag that is used to define the associated field in the yaml (or json) used to create the resource
 e.g.
-```
+
+```golang
 ConsumerImage   string                   `json:"consumer"`
 ```
+
 means that if a `consumer` field is defined in the yaml that value is used to populate the ConsumerImage field in the relevant golang structure
 
-
 #### controllers/ptemplate_controller.go
+
 The heart of the operator is the Reconcile() function in this file which implements the actual functionality.
 
 This function is run whenever an object of a type owned by the operator (listed in the `SetupWithManager()` function), so it needs to be idempotent.
@@ -68,49 +81,47 @@ In the ptemplate-operator we own a DaemonSet so reconcile is run for each ptempl
 
 For production purposes it would make sense to break [this file](../ptemplate-operator/controllers/ptemplate_controller.go) into separate files for the Module and consumer DaemonSet, remove some of the logging, handle errors better, and generally do all the things that turn example code into production quality. But that would also reduce its clarity!
 
-
 #### config/rbac/role.yaml
+
 By default the operator only has permissions on its own CRD, to be able to access any other resource in the cluster (e.g. to list, and create DaemonSets or Pods) permissions need to be added to this file. These then get deployed as part of the operator-manager-role e.g.
-```
- kubectl get clusterrole ptemplate-operator-manager-role
+
+```bash
+kubectl get clusterrole ptemplate-operator-manager-role
 ```
 
 If the operator logs show permissions errors this is probably the file that needs changing.
 
-
 #### Makefile
-The variable `IMAGE_TAG_BASE` was set to have the required image name and registry, for convenience.
 
+The variable `IMAGE_TAG_BASE` was set to have the required image name and registry, for convenience.
 
 ## Installing
 
 ### Building And Deploying
 
-Building the operator is as easy as running ` make build` this will also regenerate any of the boilerplate code to reflect changes in the API (`api/v1alpha1/ptemplate_types.go`).
-
+Building the operator is as easy as running `make build` this will also regenerate any of the boilerplate code to reflect changes in the API (`api/v1alpha1/ptemplate_types.go`).
 
 Once the code is building successfully you can build the operator image running the `docker-build` target
 
-```
+```bash
 make docker-build
 ```
+
 Will build the code and create a docker image with it named for the  `IMAGE_TAG_BASE` variable, which can then be pushed to a registry.
 
-
-```
+```bash
 make deploy
 ```
+
 Will deploy the image as a pod. It will also create all the other required resource such as the `CRD` itself, `serviceaccounts`, `clusterroles` and `rolebindings` etc. These are initially created by operator-sdk, but can be changed if needed.
 
-
 (During testing I had a strange error where I was writing to the `ptemplate.status.consumers` field to report the status but it wasn't getting changed, and no errors were being thrown, eventually I realised I had updated the CRD, and the `config/crd/bases/pt.example.com_ptemplates.yaml` file had been updated by Make, but I hadn't re-run `make deploy` so Kubernetes wasn't aware of my changes. Once I'd done that everything worked correctly)
-
 
 #### Creating An Instance
 
 Once the operator is installed and running successfully you can create a `ptemplate` resource from the example yaml
 
-```
+```bash
 kubectl apply -f example.yaml
 ```
 
@@ -120,27 +131,30 @@ Any errors during the resource creation process can be seen in the controllers l
 
 e.g.
 
-```
+```bash
 kubectl logs -n ptemplate-operator-system ptemplate-operator-controller-manager-5d4795f966-4cb98
 ```
 
 ## Uninstalling
 
-#### Uninstall CRDs
+### Uninstall CRDs
+
 To delete the CRDs from the cluster:
 
-```sh
+```bash
 make uninstall
 ```
 
-#### Undeploy controller
+### Undeploy controller
+
 Undeploy the controller from the cluster:
 
-```sh
+```bash
 make undeploy
 ```
 
 ## Links
+
 * [Operator SDK](https://sdk.operatorframework.io/docs/building-operators/golang/quickstart/)
 
 * [Kubernetes API](https://kubernetes.io/docs/reference/kubernetes-api/)

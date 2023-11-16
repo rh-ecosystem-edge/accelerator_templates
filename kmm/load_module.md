@@ -1,8 +1,8 @@
 # I want to deploy a prebuilt driver container with KMM
 
 ## Problem
-You have a prebuilt Driver Container and want to load it on all the nodes in a cluster that match a particular criteria
 
+You have a prebuilt Driver Container and want to load it on all the nodes in a cluster that match a particular criteria
 
 ## Solution
 
@@ -10,7 +10,7 @@ Create a yaml file defining a `Module` resource with the `containerImage` parame
 
 ([see full file](load_module.yaml)):
 
-```
+```yaml
 apiVersion: kmm.sigs.x-k8s.io/v1beta1
 kind: Module
 metadata:
@@ -32,7 +32,6 @@ spec:
     name: pt-char-pull-secret
   selector:
     node-role.kubernetes.io/worker: "worker"
-
 ```
 
 Then apply this file with `oc apply -f module.yaml` or `kubectl apply -f module.yaml`
@@ -53,14 +52,13 @@ The last field in the `modprobe` section is `parameters`. This is simply an arra
 
 These fields are combined by KMM to build the command line. In our example this will result in the driver container being started with the command:
 
-```
+```bash
 /bin/sh -c modprobe -v -d "/opt" "ptemplate_char_dev" max_dev=5 default_msg=ptemplate
 ```
 
 ### The spec.moduleLoader.imagePullPolicy field
 
 The `imagePullPolicy` setting is the simplest to understand, it simply determines when OpenShift should pull the Driver Container image from the registry and when it should use a locally cached version. Generally it is advisable to set this to `Always` especially when debugging, there is nothing as frustrating as spending hours trying to hunt down a bug only to find you've been updating the registry and OpenShift has been using the same cached image all the time.
-
 
 ### The spec.moduleLoader.kernelMappings section
 
@@ -70,13 +68,10 @@ As the kernel ABI can change between different kernel versions, different distri
 
 Our ptemplate_char_dev.ko example is quite simple and  so for the moment we will make the assumption that it will work everywhere and use a catch-all regexp to say that for all kernels use the same image.
 
-
 ### Other Sections
-There are two other sections defined in the yaml. 
+
+There are two other sections defined in the yaml.
 
 `spec.imageRepoSecret` this simply gives the \name of a previously defined Secret resource containing the credentials needed to pull the Driver Container image. In this simple case these credentials just need read permissions on the image.
 
 `spec.selector` defines a series of label/value pairs that are matched against the node labels to determine where the kernel module is needed, in our example we only want the kmod on nodes explicitly labelled as worker nodes, but a selector defining a driver should only be loaded on nodes with a particular piece of hardware, or where some prerequisite kernel module is already loaded are also possible.
-
-
-
