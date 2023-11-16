@@ -2,7 +2,7 @@
 
 1. [Introduction](#introduction)
 
-2. [The Ptemplate-operator example](#the ptemplate-operator-example)
+2. [The Ptemplate-operator example](#the-ptemplate-operator-example)
 
 3. [Important Files](#important-files)
 
