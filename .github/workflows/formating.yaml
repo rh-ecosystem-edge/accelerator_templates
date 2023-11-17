@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install requirements
-        run: apt-get -y install yamllint aspell
       - name: spellcehck markdown
         run: ${PWD}/tests/spellcheck.sh
       - name: Lint markdown files
