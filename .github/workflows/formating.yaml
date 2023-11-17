@@ -9,7 +9,11 @@ jobs:
   spellcheck-and-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Install requirements
+        run: |
+          sudo apt-get update
+          sudo apt-get install aspell yamllint
       - name: spellcehck markdown
         run: ${PWD}/tests/spellcheck.sh
       - name: Lint markdown files
