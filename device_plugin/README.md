@@ -42,7 +42,7 @@ The `Allocate()` function is called by the kubelet prior to scheduling pod on th
 
 * verify the state/health of each requested device and return an error if it's not available, causing the requesting pod to fail to schedule.
 
-* It can add specific annotations to the response. Those annotation will be set by kubelet on the container using container runtime
+* It can add specific annotations to the response. Those annotation will be set by the kubelet on the container
 
 * It can add environment variable to the response. Those variable will be passed  on to the pod by the kubelet so can include such things as device node names, PCI buss addresses or any thing else that allows the pod to know details about precisely what has been allocated.
 
