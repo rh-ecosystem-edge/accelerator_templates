@@ -29,7 +29,7 @@ do
 
     for file in ${CHECKFILES}
     do
-        WORDS=$(cat ${file} | aspell -p ${JARGONFILE} -M list)
+        WORDS=$(cat ${file} | aspell -l en_GB.UTF-8 -p ${JARGONFILE} -M list)
         if [ ! -z "${WORDS}" ]; then
             echo "** ${file} **"
             #echo "${WORDS}"
