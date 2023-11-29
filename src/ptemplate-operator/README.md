@@ -34,9 +34,9 @@ An Operator is an extension to Kubernetes and OpenShift that adds a Custom Resou
 
 ## The Ptemplate-operator example
 
-Our example [ptemplate-operator](../src/ptemplate-operator) implements the `Ptemplate` resource type (or Kind). When a resource of this Kind is created Kubernetes notifies the ptemplate-operator instance which runs its Reconcile() function which then creates a number of other resources needed to run our example. It does this by creating a Module resource that `KMM` picks up and processes, and a `DaemonSet` resource for or consumer pods that is picked up by core Kubernetes
+Our example [ptemplate-operator](../ptemplate-operator) implements the `Ptemplate` resource type (or Kind). When a resource of this Kind is created Kubernetes notifies the ptemplate-operator instance which runs its Reconcile() function which then creates a number of other resources needed to run our example. It does this by creating a Module resource that `KMM` picks up and processes, and a `DaemonSet` resource for or consumer pods that is picked up by core Kubernetes
 
-e.g ([See here](../src/ptemplate-operator/example.yaml))
+e.g ([See here](../ptemplate-operator/example.yaml))
 
 ```yaml
 apiVersion: ptemplates.pt.example.com/v1alpha
@@ -79,7 +79,7 @@ This function is run whenever an object of a type owned by the operator (listed 
 
 In the ptemplate-operator we own a DaemonSet so reconcile is run for each ptemplate resource, whenever any DaemonSet in the cluster is changed. It needs to get the config for the relevant ptemplate resource, check the sub-resources that should exist (in this case a KMM Module, and a DaemonSet) and reconcile them, creating them if they don't exist, correcting them if they differ from the `ptemplate.Spec` , update the `ptemplate.Status` if needed, and most importantly of all, do nothing if nothing has changed.
 
-For production purposes it would make sense to break [this file](../ptemplate-operator/controllers/ptemplate_controller.go) into separate files for the Module and consumer DaemonSet, remove some of the logging, handle errors better, and generally do all the things that turn example code into production quality. But that would also reduce its clarity!
+For production purposes it would make sense to break [this file](controllers/ptemplate_controller.go) into separate files for the Module and consumer DaemonSet, remove some of the logging, handle errors better, and generally do all the things that turn example code into production quality. But that would also reduce its clarity!
 
 #### config/rbac/role.yaml
 

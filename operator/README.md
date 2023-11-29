@@ -79,7 +79,7 @@ The heart of the operator is the Reconcile() function in this file which impleme
 This function is run whenever an object of a type owned by the operator (listed in the `SetupWithManager()` function), so it needs to be idempotent.
 In the ptemplate-operator we own a DaemonSet so reconcile is run for each ptemplate resource, whenever any DaemonSet in the cluster is changed. It needs to get the configuration for the relevant ptemplate resource, check the sub-resources that should exist (in this case a KMM Module, and a DaemonSet) and reconcile them, creating them if they do not exist, correcting them if they differ from the `ptemplate.Spec` , update the `ptemplate.Status` if needed, and most importantly of all, do nothing if nothing has changed.
 
-For production purposes it would make sense to break [this file](../ptemplate-operator/controllers/ptemplate_controller.go) into separate files for the Module and consumer DaemonSet, remove some of the logging, handle errors better, and generally do all the things that turn example code into production quality. But that would also reduce its clarity!
+For production purposes it would make sense to break [this file](../src/ptemplate-operator/controllers/ptemplate_controller.go) into separate files for the Module and consumer DaemonSet, remove some of the logging, handle errors better, and generally do all the things that turn example code into production quality. But that would also reduce its clarity!
 
 #### config/rbac/role.yaml
 
