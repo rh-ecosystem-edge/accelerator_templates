@@ -21,7 +21,7 @@ Hardware Operators are built up from a number of components not all solutions wi
 
 ### Table Of Contents
 
-1. [Kernel Modules](kernel_module/README.md)
+1. [Kernel Modules](src/kernel_module/README.md)
 
 1. [Driver Containers](driver_container/README.md)
 
@@ -33,19 +33,17 @@ Hardware Operators are built up from a number of components not all solutions wi
 
 1. [Operator](operator/README.md)
 
-1. [Certification For Containers and Operators](certfication/README.md)
+1. [Certification For Containers and Operators](certification/README.md)
 
 1. [Support](support.md)
 
 #### Appendices
 
-1. [Checklist](Checklist.md)
+1. [Checklist](checklist.md)
 
 1. [Glossary Of Terms](GLOSSARY.md)
 
 ## Links and Related Operators
-
-[Glossary](glossary.md) a collection of useful terms.
 
 [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift)
 
