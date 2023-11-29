@@ -20,3 +20,5 @@ jobs:
         run: ${PWD}/tests/markdownlint.sh
       - name: Lint yaml files
         run: ${PWD}/tests/yamllint.sh
+      - name: linkcheck markdown files
+        run: ${PWD}/tests/linkcheck.sh
