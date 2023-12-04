@@ -2,9 +2,10 @@
 
 Adding hardware support to OpenShift clusters is more complicated than on non-containerised Linux. While Red Hat CoreOS (RHCOS), the operating system OpenShift sits upon, is essentially Red Hat Enterprise Linux (RHEL) its appliance nature gives it two important differences.
 
-Firstly access to the operating system is restricted. While it is possible to connect to an OpenShift node via ssh and change to the root user this behaviour is discouraged, and installing software on the underlying RHCOS operating system will lead to invalidating support contracts.
+Firstly RHCOS is designed to be immutable. This means rebooting the node deletes any changes made to the operating system.
 
-Secondly RHCOS is designed to be immutable. This means rebooting the node deletes any changes made to the operating system.
+Secondly access to the operating system is restricted. While it is possible to connect to an OpenShift node via ssh and change to the root user this behaviour is discouraged, and installing software on the underlying RHCOS operating system will lead to invalidating support contracts.
+
 
 Together these make the traditional approach of installing packages of drivers and agent software that system administrators can install problematic. Instead a new approach of containerised drivers managed by OpenShift operators is required.
 Partner Templates is made up of three sections
@@ -32,6 +33,8 @@ Hardware Operators are built up from a number of components not all solutions wi
 1. [Device Plugin](device_plugin/README.md)
 
 1. [Operator](operator/README.md)
+
+1. [Integrating with KMM](integration/README.md)
 
 1. [Certification For Containers and Operators](certification/README.md)
 

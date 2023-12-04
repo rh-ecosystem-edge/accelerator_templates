@@ -2,7 +2,7 @@
 
 ## Solution
 
-The `module.spec.moduleLoader.container.sign` section of kmm can be used to sign the kernel modules inside the device container using the `signfile` binary from the Linux kernel and a public/private key pair passed in as `configmap` objects.
+The `module.spec.moduleLoader.container.sign` section of kmm can be used to sign the kernel modules inside the device container using the `signfile` binary from the Linux kernel and a public/private key pair passed in as `Secret` objects.
 
 ## Discussion
 

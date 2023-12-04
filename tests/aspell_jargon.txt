@@ -78,3 +78,7 @@ AppArmor
 SELinux
 seccomp
 Buildah
+etcd
+ReconcileModule
+ReconcileConsumer
+SetupWithManager

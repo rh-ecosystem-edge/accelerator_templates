@@ -22,7 +22,7 @@ The Partner Templates Operator is a set of components to demonstrate the deployi
 
 # Installation
 
-## Install Prerequisites 
+## Install Prerequisites
 
 ### Node Feature Discovery Operator
 [Node Feature Discovery (NFD) Operator](https://docs.openshift.com/container-platform/4.14/hardware_enablement/psap-node-feature-discovery-operator.html) manages the deployment and life cycle of the NFD add-on to detect hardware features and system configuration, such as PCI cards, kernel, operating system version, etc.
