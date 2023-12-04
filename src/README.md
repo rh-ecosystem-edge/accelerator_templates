@@ -14,9 +14,7 @@ The Partner Templates Operator is a set of components to demonstrate the deployi
 
 - An Operator that will create a Module resource that the Kernel-Module-Management operator will use to manage loading and unloading the kernel module, and a DaemonSet resource that will deploy a 'consumer' pod on every node to read and write to the /dev/ptemplate devices.
 
-
 **NOTE: This is a learning tool, designed to explain the principles and the various components that can be used together to build a solution, the code here is not production quality and is NOT supported by Red Hat or anyone else.**
-
 
 **SECOND NOTE: If you find something you think could be better feel free to file an Issue in github, or (even better) a pull request. The aim is to make this generally useful as a learning tool so any improvements are welcomed!**
 
@@ -32,7 +30,6 @@ Follow the guide below to install the NFD operator using the command line or web
 
 - [Install from the CLI](https://docs.openshift.com/container-platform/4.14/hardware_enablement/psap-node-feature-discovery-operator.html#install-operator-cli_node-feature-discovery-operator)
 - [Install from the web console](https://docs.openshift.com/container-platform/4.14/hardware_enablement/psap-node-feature-discovery-operator.html#install-operator-web-console_node-feature-discovery-operator)
-
 
 ### Install Kernel-Module-Management Operator
 
