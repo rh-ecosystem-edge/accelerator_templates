@@ -70,4 +70,4 @@ On the other hand, it requires the source code to be available to end users such
 
 ## Links
 
-* [KMM upstream documentation](https://kmm.sigs.k8s.io/documentation/module_loader_image/)
+* [KMM upstream documentation](https://kmm.sigs.k8s.io/)
