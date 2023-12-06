@@ -1,5 +1,17 @@
 # Using KMM with other operators
 
+1. [Introduction](#introduction)
+
+2. [Loading a driver](#loading-a-driver)
+
+3. [Unloading a driver](#unloading-a-driver)
+
+4. [Example Implementation](ptemplate-implementation.md)
+
+5. [Gathering Metrics](observability.md)
+
+6. [Links](#links)
+
 ## Introduction
 
 Often loading a kernel module by itself is only part of the problem, requiring other resources like user land processes, or carefully calculated kmod parameters, to provide their full benefit.

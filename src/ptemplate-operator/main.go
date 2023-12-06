@@ -24,6 +24,7 @@ import (
 	// to ensure that exec-entrypoint and run can make use of them.
 	_ "k8s.io/client-go/plugin/pkg/client/auth"
 
+	//import the core Kubernetes libraries
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
@@ -31,9 +32,15 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
+	// import the parts of out operator
 	ptv1alpha1 "github.com/chr15p/partner_templates/api/v1alpha1"
 	"github.com/chr15p/partner_templates/controllers"
+
+	//import the bits of kmm we need to reference
 	kmmv1beta1 "github.com/rh-ecosystem-edge/kernel-module-management/api/v1beta1"
+
+	//import the monitoring pacakge
+	"github.com/chr15p/partner_templates/monitoring"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -47,6 +54,9 @@ func init() {
 
 	utilruntime.Must(ptv1alpha1.AddToScheme(scheme))
 	utilruntime.Must(kmmv1beta1.AddToScheme(scheme))
+
+	// initialise the metrics
+	monitoring.RegisterMetrics()
 
 	//+kubebuilder:scaffold:scheme
 }

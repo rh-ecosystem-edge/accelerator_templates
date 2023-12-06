@@ -6,7 +6,6 @@ Firstly RHCOS is designed to be immutable. This means rebooting the node deletes
 
 Secondly access to the operating system is restricted. While it is possible to connect to an OpenShift node via ssh and change to the root user this behaviour is discouraged, and installing software on the underlying RHCOS operating system will lead to invalidating support contracts.
 
-
 Together these make the traditional approach of installing packages of drivers and agent software that system administrators can install problematic. Instead a new approach of containerised drivers managed by OpenShift operators is required.
 Partner Templates is made up of three sections
 

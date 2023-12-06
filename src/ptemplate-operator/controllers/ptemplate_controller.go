@@ -29,13 +29,17 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
-	cachev1alpha1 "github.com/chr15p/partner_templates/api/v1alpha1"
 	kmmv1beta1 "github.com/rh-ecosystem-edge/kernel-module-management/api/v1beta1"
 	appsv1 "k8s.io/api/apps/v1"
 	v1 "k8s.io/api/core/v1"
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
 	resource "k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
+	cachev1alpha1 "github.com/chr15p/partner_templates/api/v1alpha1"
+
+	//import the monitoring pacakge
+	"github.com/chr15p/partner_templates/monitoring"
 )
 
 // PtemplateReconciler reconciles a Ptemplate object
@@ -109,11 +113,15 @@ func (r *PtemplateReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 		logger.Info("Reconcile Status", "setting Status.Consumers to", podNames)
 		err = r.Status().Patch(ctx, existingPtemplate, patch)
 		if err != nil {
-			logger.Info("Reconcile Status3", "update status failed===", err)
 			return ctrl.Result{}, err
 		}
 		return ctrl.Result{Requeue: true}, nil
 	}
+
+	// report the number of consumer pods to prometheus
+	monitoring.PtemplateGauge.Set(float64(len(podNames)))
+	//report the number of times reconcile has run
+	monitoring.PtemplateCounter.Inc()
 
 	logger.Info("Reconcile completed")
 	return ctrl.Result{}, nil

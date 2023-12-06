@@ -82,3 +82,5 @@ etcd
 ReconcileModule
 ReconcileConsumer
 SetupWithManager
+Prometheus
+Observability
