@@ -7,7 +7,20 @@ Firstly RHCOS is designed to be immutable. This means rebooting the node deletes
 Secondly access to the operating system is restricted. While it is possible to connect to an OpenShift node via ssh and change to the root user this behaviour is discouraged, and installing software on the underlying RHCOS operating system will lead to invalidating support contracts.
 
 Together these make the traditional approach of installing packages of drivers and agent software that system administrators can install problematic. Instead a new approach of containerised drivers managed by OpenShift operators is required.
-Partner Templates is made up of three sections
+
+To support this Red Hat has developed a number of technologies:
+
+* [Driver Toolkit (DTK)](driver_container/README.md) - A toolkit to help create OCI images containing kernel modules and drivers (known as driver containers)
+
+* [Node Feature Discovery (NFD) Operator](nfd/README.md) - An operator and application that labels nodes according to hardware and operating system features
+
+* [Kernel Module Management (KMM) Operator](kmm/README.md) - An operator to load driver containers on nodes that meet set criteria (normally nodes with the given hardware)
+
+Together these provide a rich set of tools for third party developers to build on to support their own drivers with custom operators and other tooling.
+
+
+## Partner Templates
+Partner Templates is set of examples and documentation to introduce these technologies. It is made up of three sections:
 
 * [The PTemplate Operator](src/README.md): An example driver, Operator, and other code to provide a working example of one approach to implementing a driver solution on OpenShift or Kubernetes
 

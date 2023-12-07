@@ -1,0 +1,37 @@
+#!/bin/sh
+
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+	against=HEAD
+else
+	# Initial commit: diff against an empty tree object
+	against=$(git hash-object -t tree /dev/null)
+fi
+
+# If you want to allow non-ASCII filenames set this variable to true.
+
+FILES=$(git diff-index --name-only  --cached $against)
+
+#echo $PWD
+#echo $FILES
+
+$PWD/tests/spellcheck.sh $FILES
+ERR=$?
+if [[ $ERR -ne 0 ]]; then
+    echo "pre-commit hook: Spellchecking failed"
+    exit $ERR
+fi
+
+$PWD/tests/yamllint.sh $FILES
+ERR=$?
+if [[ $ERR -ne 0 ]]; then
+    echo "pre-commit hook: yamllint failed"
+    exit $ERR
+fi
+
+$PWD/tests/linkcheck.sh $FILES
+ERR=$?
+if [[ $ERR -ne 0 ]]; then
+    echo "pre-commit hook: linkcheck failed"
+    exit $ERR
+fi
