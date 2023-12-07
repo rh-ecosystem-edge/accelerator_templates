@@ -32,7 +32,7 @@ do
 
         $PODMAN  run -v $PWD:/workdir:z ghcr.io/igorshubovych/markdownlint-cli:latest --disable MD013 --ignore '*.!(md)'  --  $file
         if [ $? -ne 0 ]; then
-            ERR=$?
+            ERR=1
         fi
     done
 done
