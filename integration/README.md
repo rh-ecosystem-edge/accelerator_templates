@@ -8,9 +8,7 @@
 
 4. [Example Implementation](ptemplate-implementation.md)
 
-5. [Gathering Metrics](observability.md)
-
-6. [Links](#links)
+5. [Links](#links)
 
 ## Introduction
 
@@ -83,4 +81,4 @@ Care must obviously be taken to ensure that the Operator doesn't not then attemp
 
 ## Links
 
-Walk through of the `Reconile()` implementation for the [Ptemplate Operator](../src/ptemplate-operator)
+Walk through of the `Reconcile()` implementation for the [Ptemplate Operator](../src/ptemplate-operator)

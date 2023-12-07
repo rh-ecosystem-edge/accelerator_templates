@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Kubernetes is designed to talk to Prometheus for the logging and graphing of metrics. This means there is good support for gathering and communicating values in the golang libraries.
+Kubernetes is designed to talk use Prometheus to gather metrics on what is going on. These metrics can then be passed to Grafana for logging and graphing. This means there is good support for gathering and communicating values in the golang libraries.
 
 There are two things that need to be done in the operator, firstly registering a data structure for each metric to be gathered, and secondly actually gathering the metrics. The actual sending of the metrics to Prometheus is then handled automatically.
 
@@ -42,12 +42,10 @@ To then gather the metrics we use that Prometheus object anywhere else in the co
 monitoring.PtemplateGauge.Set(float64(len(podNames)))
 ```
 
-### Useful Metrics
-
-Useful metrics to gather depends very much on the implementation details of the driver the operator is managing.
-
 ## Links
 
 [Monitoring and Observability](https://sdk.operatorframework.io/docs/building-operators/golang/advanced-topics/#monitoring-and-observability)
 
-[Prometheus golang client docs](https://pkg.go.dev/github.com/prometheus/client_golang/prometheus)
+[Prometheus golang client documentation](https://pkg.go.dev/github.com/prometheus/client_golang/prometheus)
+
+[OpenShift Documentation: Managing metrics](https://docs.openshift.com/container-platform/4.14/monitoring/managing-metrics.html)

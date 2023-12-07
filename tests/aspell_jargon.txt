@@ -84,3 +84,6 @@ ReconcileConsumer
 SetupWithManager
 Prometheus
 Observability
+Grafana
+PagerDuty
+PrometheusRule

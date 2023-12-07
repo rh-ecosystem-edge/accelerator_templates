@@ -35,6 +35,8 @@ Hardware Operators are built up from a number of components not all solutions wi
 
 1. [Integrating with KMM](integration/README.md)
 
+1. [Observability and Metrics](observability/README.md)
+
 1. [Certification For Containers and Operators](certification/README.md)
 
 1. [Support](support.md)
