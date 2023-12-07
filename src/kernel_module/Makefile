@@ -14,5 +14,5 @@ clean:
 	make -C /usr/src/kernels/$(KVER)/ M=$(PWD) clean
 install:
 	install -v -m 755 -d /lib/modules/$(KVER)/
-	install -v -m 644 simple_char_dev.ko /lib/modules/$(KVER)/simple_char_dev.ko
+	install -v -m 644 ptemplate_char_dev.ko /lib/modules/$(KVER)/ptemplate_char_dev.ko
 	depmod -F /lib/modules/$(KVER)/System.map $(KVER)
