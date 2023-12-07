@@ -18,8 +18,8 @@ To support this Red Hat has developed a number of technologies:
 
 Together these provide a rich set of tools for third party developers to build on to support their own drivers with custom operators and other tooling.
 
-
 ## Partner Templates
+
 Partner Templates is set of examples and documentation to introduce these technologies. It is made up of three sections:
 
 * [The PTemplate Operator](src/README.md): An example driver, Operator, and other code to provide a working example of one approach to implementing a driver solution on OpenShift or Kubernetes
