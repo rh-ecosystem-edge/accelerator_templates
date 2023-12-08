@@ -16,19 +16,19 @@ To support this Red Hat has developed a number of technologies:
 
 Together these provide a rich set of tools for third party developers to build on to support their own drivers with custom operators and other tooling.
 
-## Suggested workflow
+## Creating a custom Operator
 
 Every operator is different and will need different components so the steps required to build the solution will be different, but the following checklist should provide a good starting point for most projects.
 
 * [ ] Work through the [Operator Checklist](checklist.md) to assess what work has already been done and what is required to be done before shipping.
 
-* [ ] Create the Device Driver and any user land tools. This is the same as for any other version of Linux including RHEL. ([Example](src/kernel_module/README.md)  [Source Code](src/kernel_module/))
+* [ ] Create the Device Driver and any user land tools. This is the same as for any other version of Linux including RHEL. ([Example Source Code](src/kernel_module/) and  [Discussion](src/kernel_module/README.md))
 
-* [ ] Package the device driver into a [Driver Container](driver_container/README.md) using the  [Driver Tool Kit (DTK)](https://github.com/openshift/driver-toolkit) a toolkit to help create OCI images for kernel modules and drivers.  ([Example Source](src/driver_container))
+* [ ] Package the device driver into a [Driver Container](driver_container/README.md) using the  [Driver Tool Kit (DTK)](https://github.com/openshift/driver-toolkit) a toolkit to help create OCI images for kernel modules and drivers.  ([Example Source Code](src/driver_container))
 
 * [ ] Package any user land component required into container images via a [Dockerfile](https://docs.docker.com/engine/reference/builder/) and [podman build](https://docs.podman.io/en/latest/markdown/podman-build.1.html)
 
-* [ ] A config for the [Node Feature Discovery (NFD)](nfd/README.md) operator, labelling nodes based on its hardware and operating system features.  ([Example Source](src/nfd/pci_devices.yaml))
+* [ ] A config for the [Node Feature Discovery (NFD)](nfd/README.md) operator, labelling nodes based on its hardware and operating system features. ([Example Source](src/nfd/pci_devices.yaml))
 
 * [ ] [Create a Device Plugin](device_plugin/README.md) to allow the user land components to request the hardware and make sure they are not being oversubscribed. ([Example Source](src/ptemplate-device-plugin/))
 
@@ -36,7 +36,7 @@ Every operator is different and will need different components so the steps requ
 
 * [ ] Create a configuration for the [Kernel Module Management](kmm/README.md) operator to load driver containers on nodes that meet set criteria (normally nodes with the given hardware).  Again building this as a manually applied yaml file is both a good sanity check that all the parts work together manually before they get automated with an Operator, and translate directly into the golang structures the operator needs.
 
-* [ ] Automate the deployment of the components by creating a custom Operator that deploys the Driver Container and the user land components it needs. ([Operators](operator/README.md) [Integration with KMM](integration/README.md) [Example source](src/ptemplate-operator/)
+* [ ] Automate the deployment of the components by creating a custom Operator that deploys the Driver Container and the user land components it needs. ([Discussion of building Operators](operator/README.md), discussion of [integrating with KMM](integration/README.md) and [Example source](src/ptemplate-operator/))
 
 * [ ] Add [metrics](observability/README.md) the operator to report the state of the hardware to the cluster manager.
 
