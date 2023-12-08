@@ -20,31 +20,31 @@ Together these provide a rich set of tools for third party developers to build o
 
 Every operator is different and will need different components so the steps required to build the solution will be different, but the following checklist should provide a good starting point for most projects.
 
-* [] Work through the [Operator Checklist](checklist.md) to assess what work has already been done and what is required to be done before shipping.
+* [ ] Work through the [Operator Checklist](checklist.md) to assess what work has already been done and what is required to be done before shipping.
 
-* [] Create the Device Driver and any user land tools. This is the same as for any other version of Linux including RHEL. ([Example](src/kernel_module/README.md)  [Source Code](src/kernel_module/))
+* [ ] Create the Device Driver and any user land tools. This is the same as for any other version of Linux including RHEL. ([Example](src/kernel_module/README.md)  [Source Code](src/kernel_module/))
 
-* [] Package the device driver into a [Driver Container](driver_container/README.md) using the  [Driver Tool Kit (DTK)](https://github.com/openshift/driver-toolkit) a toolkit to help create OCI images for kernel modules and drivers.  ([Example Source](src/driver_container))
+* [ ] Package the device driver into a [Driver Container](driver_container/README.md) using the  [Driver Tool Kit (DTK)](https://github.com/openshift/driver-toolkit) a toolkit to help create OCI images for kernel modules and drivers.  ([Example Source](src/driver_container))
 
-* [] Package any user land component required into container images via a [Dockerfile](https://docs.docker.com/engine/reference/builder/) and [podman build](https://docs.podman.io/en/latest/markdown/podman-build.1.html)
+* [ ] Package any user land component required into container images via a [Dockerfile](https://docs.docker.com/engine/reference/builder/) and [podman build](https://docs.podman.io/en/latest/markdown/podman-build.1.html)
 
-* [] A config for the [Node Feature Discovery (NFD)](nfd/README.md) operator, labelling nodes based on its hardware and operating system features.  ([Example Source](src/nfd/pci_devices.yaml))
+* [ ] A config for the [Node Feature Discovery (NFD)](nfd/README.md) operator, labelling nodes based on its hardware and operating system features.  ([Example Source](src/nfd/pci_devices.yaml))
 
-* [] [Create a Device Plugin](device_plugin/README.md) to allow the user land components to request the hardware and make sure they are not being oversubscribed. ([Example Source](src/ptemplate-device-plugin/))
+* [ ] [Create a Device Plugin](device_plugin/README.md) to allow the user land components to request the hardware and make sure they are not being oversubscribed. ([Example Source](src/ptemplate-device-plugin/))
 
-* [] Create a [DaemonSet configuration](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) (as a yaml file), to deploy the user land components. The yaml created here is useful for testing, but will also translate directly into the golang structures that the operator will use to instantiate Kubernetes objects.
+* [ ] Create a [DaemonSet configuration](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) (as a yaml file), to deploy the user land components. The yaml created here is useful for testing, but will also translate directly into the golang structures that the operator will use to instantiate Kubernetes objects.
 
-* [] Create a configuration for the [Kernel Module Management](kmm/README.md) operator to load driver containers on nodes that meet set criteria (normally nodes with the given hardware).  Again building this as a manually applied yaml file is both a good sanity check that all the parts work together manually before they get automated with an Operator, and translate directly into the golang structures the operator needs.
+* [ ] Create a configuration for the [Kernel Module Management](kmm/README.md) operator to load driver containers on nodes that meet set criteria (normally nodes with the given hardware).  Again building this as a manually applied yaml file is both a good sanity check that all the parts work together manually before they get automated with an Operator, and translate directly into the golang structures the operator needs.
 
-* [] Automate the deployment of the components by creating a custom Operator that deploys the Driver Container and the user land components it needs. ([Operators](operator/README.md) [Integration with KMM](integration/README.md) [Example source](src/ptemplate-operator/)
+* [ ] Automate the deployment of the components by creating a custom Operator that deploys the Driver Container and the user land components it needs. ([Operators](operator/README.md) [Integration with KMM](integration/README.md) [Example source](src/ptemplate-operator/)
 
-* [] Add [metrics](observability/README.md) the operator to report the state of the hardware to the cluster manager.
+* [ ] Add [metrics](observability/README.md) the operator to report the state of the hardware to the cluster manager.
 
-* [] Create any PrometheusRule configuration yaml that might be needed.
+* [ ] Create any PrometheusRule configuration yaml that might be needed.
 
-* [] Add [Grafana dashboards](https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/create-dashboard/) and any other supporting components needed to make the cluster operator's life easier.
+* [ ] Add [Grafana dashboards](https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/create-dashboard/) and any other supporting components needed to make the cluster operator's life easier.
 
-* [] [Certify your driver](certification/README.md). As only a specific version of the images are certified this needs to be the final step before release.
+* [ ] [Certify your driver](certification/README.md). As only a specific version of the images are certified this needs to be the final step before release.
 
 &nbsp;
 
