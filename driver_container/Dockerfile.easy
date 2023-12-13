@@ -2,7 +2,7 @@
 ARG KERNEL_VERSION
 ARG DTK=registry.redhat.io/openshift4/driver-toolkit-rhel9:v4.13.0-202308011445.p0.gd719bdc.assembly.stream as builder
 ARG KMOD_SRC=https://github.com/rh-ecosystem-edge/accelerator_templates.git
-ARG REPO_DIR=partner_templates/kernel_module/
+ARG REPO_DIR=accelerator_templates/kernel_module/
 
 FROM ${DTK} as builder
 WORKDIR /usr/src

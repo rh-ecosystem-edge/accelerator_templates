@@ -17,13 +17,13 @@ ARG DTK=registry.redhat.io/openshift4/driver-toolkit-rhel9:v4.13.0-202308011445.
 FROM ${DTK} as builder
 WORKDIR /usr/src
 RUN ["git", "clone", "https://github.com/rh-ecosystem-edge/accelerator_templates.git"]
-WORKDIR /usr/src/partner_templates/kernel_module/
+WORKDIR /usr/src/accelerator_templates/kernel_module/
 RUN KERNEL_SRC_DIR=/lib/modules/${KERNEL_VERSION}/build make all KVER=${KERNEL_VERSION}
 
 FROM registry.redhat.io/ubi9/ubi-minimal
 ARG KERNEL_VERSION
 RUN ["microdnf", "install", "-y", "kmod"]
-COPY --from=builder /usr/src/partner_templates/kernel_module/*.ko /opt/lib/modules/${KERNEL_VERSION}/
+COPY --from=builder /usr/src/accelerator_templates/kernel_module/*.ko /opt/lib/modules/${KERNEL_VERSION}/
 RUN depmod -b /opt ${KERNEL_VERSION}
 
 CMD [ "modprobe", "-d", "/opt", "ptemplate_char_dev"]
