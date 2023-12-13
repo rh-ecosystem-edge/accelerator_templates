@@ -3,7 +3,7 @@ FROM ${DTK} as builder
 ARG KVER
 RUN ls /lib/modules/
 WORKDIR /build/
-RUN git clone https://github.com/chr15p/partner_templates.git
+RUN git clone https://github.com/rh-ecosystem-edge/accelerator_templates.git
 WORKDIR /build/partner_templates/src/kernel_module
 RUN make all install KVER=${KVER}
 FROM registry.redhat.io/ubi9/ubi-minimal

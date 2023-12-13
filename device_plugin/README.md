@@ -60,7 +60,7 @@ For more details see the [Kubernetes Device Plugins](https://kubernetes.io/docs/
 
 * [OpenShift: Using device plugins to access external resources with pods](https://docs.openshift.com/container-platform/4.13/nodes/pods/nodes-pods-plugins.html) (Includes links to several example device plugins)
 
-* [Partner Templates Device Plugin example](../src/ptemplate-device-plugin/main.go)
+* [Accelerator Templates Device Plugin example](../src/ptemplate-device-plugin/main.go)
 
 * [Simple Device Plugin](https://github.com/yevgeny-shnaidman/simple-device-plugin/) an example device plugin configurable via a file.
 

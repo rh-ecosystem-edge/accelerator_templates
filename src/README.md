@@ -1,6 +1,6 @@
-# Partner Templates
+# Accelerator Templates
 
-The Partner Templates Operator is a set of components to demonstrate the deploying of drivers and their associated workload on OpenShift it includes
+The Accelerator Templates Operator is a set of components to demonstrate the deploying of drivers and their associated workload on OpenShift it includes
 
 - The ptemplate_char_dev kernel driver that creates a number of character devices (/dev/ptemplate-X) that you you can write up 100 bytes (configurable via a parameter) to, and read them back.
 

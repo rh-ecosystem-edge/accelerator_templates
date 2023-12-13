@@ -1,4 +1,4 @@
-# OpenShift Partner Templates
+# OpenShift Accelerator Templates
 
 Adding hardware support to OpenShift clusters is more complicated than on non-containerised Linux. While Red Hat CoreOS (RHCOS), the operating system OpenShift sits upon, is essentially Red Hat Enterprise Linux (RHEL) its appliance nature gives it two important differences.
 
